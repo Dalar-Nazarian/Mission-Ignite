@@ -40,25 +40,25 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Tablet Adjustments (Portrait / Smaller screens) */
+        /* Tablet Adjustments (Portrait / Smaller screens) - Made 20% narrower and shorter */
         @media (min-width: 768px) and (max-width: 1023px) {
             .zoom-map-container {
-                width: 440px;
+                width: 360px;
                 left: 16px;
                 top: 80px;
-                height: calc(100% - 104px);
+                height: 440px;
                 border-width: 6px;
                 border-radius: 24px;
             }
         }
 
-        /* Mobile Phone Adjustments */
+        /* Mobile Phone Adjustments - Changed to a small, non-intrusive floating square preview */
         @media (max-width: 767px) {
             .zoom-map-container {
-                width: calc(100% - 24px);
+                width: 220px;
                 left: 12px;
                 top: 76px;
-                height: calc(100% - 100px);
+                height: 220px;
                 border-width: 4px;
                 border-radius: 20px;
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
