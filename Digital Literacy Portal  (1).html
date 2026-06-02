@@ -1,0 +1,592 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech360 Training Programs | Mission: Ignite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandRed: '#C33131',
+                        brandGray: '#58595B',
+                        brandDark: '#333333',
+                        brandYellow: '#F2A900',
+                        brandLight: '#F8F9FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* SPA Page Visibility */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Nav Link Active State */
+        .nav-link.active {
+            color: #C33131;
+            border-bottom: 3px solid #C33131;
+        }
+        .nav-link {
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            color: #C33131;
+        }
+        /* Hide scrollbar for clean horizontal scrolling on mobile tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-brandDark font-sans flex flex-col min-h-screen">
+
+
+    <!-- Persistent Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo Area -->
+                <div class="flex items-center cursor-pointer" onclick="navigate('home')">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-power-off text-4xl text-brandGray"></i>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-sm tracking-widest text-brandGray font-semibold uppercase">Mission:</span>
+                            <span class="text-2xl font-black text-brandRed tracking-tight">IGNITE</span>
+                        </div>
+                        <div class="ml-3 pl-3 border-l-2 border-gray-300">
+                            <span class="text-xl font-bold text-brandGray">Tech360</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-8 items-center h-full">
+                    <button onclick="navigate('home')" class="nav-link active h-full flex items-center font-semibold text-brandGray text-sm uppercase tracking-wide">Overview</button>
+                    <button onclick="navigate('basics')" class="nav-link h-full flex items-center font-semibold text-brandGray text-sm uppercase tracking-wide">Basics</button>
+                    <button onclick="navigate('job-readiness')" class="nav-link h-full flex items-center font-semibold text-brandGray text-sm uppercase tracking-wide">Job Readiness</button>
+                    <button onclick="navigate('software')" class="nav-link h-full flex items-center font-semibold text-brandGray text-sm uppercase tracking-wide">Software Packages</button>
+                    <button onclick="navigate('youth')" class="nav-link h-full flex items-center font-semibold text-brandGray text-sm uppercase tracking-wide">Youth & Students</button>
+                </div>
+
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-brandGray hover:text-brandRed focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 shadow-inner overflow-x-auto no-scrollbar">
+            <div class="flex p-2 space-x-2">
+                <button onclick="navigate('home'); toggleMobileMenu()" class="whitespace-nowrap px-4 py-2 rounded-full bg-brandLight text-sm font-semibold hover:bg-gray-200">Overview</button>
+                <button onclick="navigate('basics'); toggleMobileMenu()" class="whitespace-nowrap px-4 py-2 rounded-full bg-brandLight text-sm font-semibold hover:bg-gray-200">Basics</button>
+                <button onclick="navigate('job-readiness'); toggleMobileMenu()" class="whitespace-nowrap px-4 py-2 rounded-full bg-brandLight text-sm font-semibold hover:bg-gray-200">Job Readiness</button>
+                <button onclick="navigate('software'); toggleMobileMenu()" class="whitespace-nowrap px-4 py-2 rounded-full bg-brandLight text-sm font-semibold hover:bg-gray-200">Software Packages</button>
+                <button onclick="navigate('youth'); toggleMobileMenu()" class="whitespace-nowrap px-4 py-2 rounded-full bg-brandLight text-sm font-semibold hover:bg-gray-200">Youth & Students</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow w-full">
+
+
+        <!-- ================= PAGE: HOME / OVERVIEW ================= -->
+        <section id="home" class="page-section active">
+            <!-- Hero -->
+            <div class="bg-brandGray text-white py-20 px-4 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
+                <div class="max-w-4xl mx-auto text-center relative z-10">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brandYellow text-brandDark font-bold text-sm tracking-wider mb-4">YOUR JOURNEY STARTS HERE</span>
+                    <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Welcome to <span class="text-brandYellow">Tech360</span></h1>
+                    <p class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto mb-10">
+                        Empowering communities through digital skills education. Whether you're turning on a computer for the first time, looking to boost your career, or preparing for college, we have a program for you.
+                    </p>
+                    <button onclick="document.getElementById('explore-programs').scrollIntoView({behavior: 'smooth'})" class="bg-brandRed hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors text-lg">
+                        Explore Our Programs
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- How it Works -->
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-brandDark uppercase tracking-wide">How Our Programs Work</h2>
+                    <div class="w-24 h-1 bg-brandRed mx-auto mt-4"></div>
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-brandGray relative">
+                        <div class="absolute -top-5 -left-5 bg-brandGray text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-sm">1</div>
+                        <h3 class="text-xl font-bold mb-3 mt-2"><i class="fas fa-clipboard-list text-brandGray mr-2"></i> Prerequisites</h3>
+                        <p class="text-gray-600">Start with a 1-on-1 Intake & Northstar pre-assessment during Digital Navigation. We meet you where you are.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-brandYellow relative">
+                        <div class="absolute -top-5 -left-5 bg-brandYellow text-brandDark w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-sm">2</div>
+                        <h3 class="text-xl font-bold mb-3 mt-2"><i class="fas fa-book-reader text-brandYellow mr-2"></i> Core Lessons</h3>
+                        <p class="text-gray-600">Small-group instruction based on curriculum developed by Northstar Digital Literacy. Learn with supportive trainers.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500 relative">
+                        <div class="absolute -top-5 -left-5 bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-sm">3</div>
+                        <h3 class="text-xl font-bold mb-3 mt-2"><i class="fas fa-plus-circle text-blue-500 mr-2"></i> Add-On Topics</h3>
+                        <p class="text-gray-600">Customize your learning. Additional lessons taught alongside required courses, based on class needs and interests.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-brandRed relative">
+                        <div class="absolute -top-5 -left-5 bg-brandRed text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-sm">4</div>
+                        <h3 class="text-xl font-bold mb-3 mt-2"><i class="fas fa-graduation-cap text-brandRed mr-2"></i> Graduation</h3>
+                        <p class="text-gray-600">Complete the exit survey and celebrate! Host sites may reward successful graduates with their own <strong>PC or Chromebook</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Program Navigation Grid -->
+            <div id="explore-programs" class="bg-brandLight py-16 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-black text-brandDark uppercase tracking-wide">Choose Your Path</h2>
+                        <p class="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">Click on a program track below to learn more about the curriculum, time commitments, and skills you will build.</p>
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div onclick="navigate('basics')" class="bg-white rounded-xl shadow hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-gray-100 group">
+                            <div class="h-2 bg-brandGray w-full group-hover:bg-brandRed transition-colors"></div>
+                            <div class="p-8 text-center">
+                                <i class="fas fa-seedling text-5xl text-brandGray mb-4 group-hover:text-brandRed transition-colors"></i>
+                                <h3 class="text-2xl font-bold mb-2">Tech360 Basics</h3>
+                                <p class="text-gray-600 text-sm mb-4">For beginners. Master the mouse, keyboard, internet, and email.</p>
+                                <span class="text-brandRed font-semibold text-sm uppercase tracking-wide">View Program <i class="fas fa-arrow-right ml-1"></i></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Card 2 -->
+                        <div onclick="navigate('job-readiness')" class="bg-white rounded-xl shadow hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-gray-100 group">
+                            <div class="h-2 bg-brandRed w-full group-hover:bg-brandYellow transition-colors"></div>
+                            <div class="p-8 text-center">
+                                <i class="fas fa-briefcase text-5xl text-brandRed mb-4 group-hover:text-brandYellow transition-colors"></i>
+                                <h3 class="text-2xl font-bold mb-2">Job Readiness</h3>
+                                <p class="text-gray-600 text-sm mb-4">For job seekers. Build resumes, search for careers, and professionalize your profile.</p>
+                                <span class="text-brandRed font-semibold text-sm uppercase tracking-wide">View Program <i class="fas fa-arrow-right ml-1"></i></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Card 3 -->
+                        <div onclick="navigate('software')" class="bg-white rounded-xl shadow hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-gray-100 group">
+                            <div class="h-2 bg-brandDark w-full group-hover:bg-blue-600 transition-colors"></div>
+                            <div class="p-8 text-center">
+                                <i class="fas fa-layer-group text-5xl text-brandDark mb-4 group-hover:text-blue-600 transition-colors"></i>
+                                <h3 class="text-2xl font-bold mb-2">Software Packages</h3>
+                                <p class="text-gray-600 text-sm mb-4">Intermediate training in Microsoft Office and Google Suite.</p>
+                                <span class="text-brandRed font-semibold text-sm uppercase tracking-wide">View Program <i class="fas fa-arrow-right ml-1"></i></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Card 4 -->
+                        <div onclick="navigate('youth')" class="bg-white rounded-xl shadow hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-gray-100 group">
+                            <div class="h-2 bg-brandYellow w-full group-hover:bg-purple-600 transition-colors"></div>
+                            <div class="p-8 text-center">
+                                <i class="fas fa-user-graduate text-5xl text-brandYellow mb-4 group-hover:text-purple-600 transition-colors"></i>
+                                <h3 class="text-2xl font-bold mb-2">Youth & Students</h3>
+                                <p class="text-gray-600 text-sm mb-4">Programs tailored for grades 3-8, high schoolers, and emerging adults.</p>
+                                <span class="text-brandRed font-semibold text-sm uppercase tracking-wide">View Program <i class="fas fa-arrow-right ml-1"></i></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 5 (In Development) -->
+                        <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow border border-gray-200 p-8 flex flex-col justify-center items-center relative overflow-hidden">
+                            <div class="absolute top-4 right-4 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded uppercase">Coming Soon</div>
+                            <i class="fas fa-flask text-4xl text-gray-400 mb-3"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-600">Future Curriculum</h3>
+                            <ul class="text-gray-500 text-sm text-center space-y-1">
+                                <li>Cybersecurity Basics</li>
+                                <li>Introduction to AI (Google Gemini)</li>
+                                <li>Basic Coding (SCRATCH)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE: BASICS ================= -->
+        <section id="basics" class="page-section max-w-5xl mx-auto py-12 px-4 sm:px-6">
+            <button onclick="navigate('home')" class="text-brandRed hover:text-red-800 font-semibold text-sm uppercase mb-6 flex items-center"><i class="fas fa-arrow-left mr-2"></i> Back to Overview</button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <i class="fas fa-seedling text-4xl text-brandGray"></i>
+                <h2 class="text-4xl font-black text-brandDark uppercase">Tech360 Basics</h2>
+            </div>
+            
+            <p class="text-xl text-gray-600 mb-8 font-light">The perfect starting point. Learn the foundations of operating a computer, navigating the web safely, and communicating online.</p>
+
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r-lg">
+                <p class="font-semibold text-blue-800"><i class="fas fa-clock mr-2"></i> Program Details:</p>
+                <p class="text-blue-700"><strong>Duration:</strong> 8 hours minimum (Best completed within a 5-day period).</p>
+                <p class="text-blue-700"><strong>Audience:</strong> Adults (18+)</p>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- PC Track -->
+                <div class="bg-white rounded-xl shadow-lg border-t-8 border-brandGray p-8">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i class="fas fa-desktop text-brandGray mr-3"></i> Windows PC Track</h3>
+                    <ul class="space-y-4 mb-6">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>PC Setup:</strong> Learn how to plug in and start up.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Windows 11:</strong> Master the operating system basics.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Basic Computer Skills:</strong> Mouse, keyboard, and files.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Internet & Email:</strong> Safe browsing and messaging.</div></li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded text-sm text-gray-700">
+                        <strong>Northstar Assessments Required:</strong> Basic Computer Skills, Windows, Internet Basics, Using Email.
+                    </div>
+                </div>
+
+
+                <!-- Chromebook Track -->
+                <div class="bg-white rounded-xl shadow-lg border-t-8 border-brandYellow p-8">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i class="fab fa-chrome text-brandYellow mr-3"></i> Chromebook Track</h3>
+                    <ul class="space-y-4 mb-6">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Chrome Basics:</strong> OS navigation and device setup.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Basic Computer Skills:</strong> Touchpad, keyboard shortcuts.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Google Docs:</strong> Intro to cloud word processing.</div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <div><strong>Internet & Email:</strong> Safe browsing and Gmail basics.</div></li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded text-sm text-gray-700">
+                        <strong>Northstar Assessments Required:</strong> Basic Computer Skills, Internet Basics, Using Email, Google Docs.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE: JOB READINESS ================= -->
+        <section id="job-readiness" class="page-section max-w-5xl mx-auto py-12 px-4 sm:px-6">
+            <button onclick="navigate('home')" class="text-brandRed hover:text-red-800 font-semibold text-sm uppercase mb-6 flex items-center"><i class="fas fa-arrow-left mr-2"></i> Back to Overview</button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <i class="fas fa-briefcase text-4xl text-brandRed"></i>
+                <h2 class="text-4xl font-black text-brandDark uppercase">Job Readiness Programs</h2>
+            </div>
+            
+            <p class="text-xl text-gray-600 mb-8 font-light">Elevate your employability. Learn the essential digital skills required by modern workplaces, from formatting resumes to professional networking online.</p>
+
+
+            <div class="space-y-8">
+                <!-- Job Readiness I -->
+                <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-brandRed text-white px-6 py-4 flex justify-between items-center">
+                        <h3 class="text-2xl font-bold">Job Readiness I <span class="font-normal text-red-200 text-lg">| Basic Level</span></h3>
+                        <span class="bg-white text-brandRed px-3 py-1 rounded-full text-sm font-bold">14 Hours Min</span>
+                    </div>
+                    <div class="p-6 md:flex gap-8">
+                        <div class="md:w-1/2">
+                            <h4 class="font-bold text-gray-800 border-b pb-2 mb-4">Required Core Curriculum</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> Basic Computer Skills</li>
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> Windows 11 OR Chrome Basics</li>
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> Internet Basics & Using Email</li>
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> Google Docs</li>
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> <strong>Career Search Skills</strong> (Indeed & Job Boards)</li>
+                                <li><i class="fas fa-angle-right text-brandRed mr-2"></i> <strong>Your Digital Footprint</strong> (LinkedIn Profile)</li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/2 mt-6 md:mt-0 bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-gray-800 border-b pb-2 mb-4">Optional Add-ons</h4>
+                            <ul class="space-y-2 text-gray-600 text-sm">
+                                <li><i class="fas fa-plus text-gray-400 mr-2"></i> Professional Email Do's & Don'ts (+1 hr)</li>
+                                <li><i class="fas fa-plus text-gray-400 mr-2"></i> Typing for Beginners (+1 hr)</li>
+                                <li><i class="fas fa-plus text-gray-400 mr-2"></i> CV / Resume Writing (+1 hr)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Job Readiness II -->
+                <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-brandDark text-white px-6 py-4 flex justify-between items-center">
+                        <h3 class="text-2xl font-bold">Job Readiness II <span class="font-normal text-gray-400 text-lg">| Intermediate Level</span></h3>
+                        <span class="bg-white text-brandDark px-3 py-1 rounded-full text-sm font-bold">12-18 Hours</span>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4"><em>Prerequisite: Must have basic computer skills or have completed Job Readiness I.</em></p>
+                        <p class="text-gray-800 font-semibold mb-4">This program combines Career Search and Digital Footprint skills with your choice of one comprehensive Software Package:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                            <button onclick="navigate('software')" class="border-2 border-brandDark rounded-lg p-4 text-center hover:bg-gray-50 transition-colors flex flex-col items-center justify-center">
+                                <i class="fab fa-microsoft text-3xl text-brandDark mb-2"></i>
+                                <span class="font-bold text-lg">Add Microsoft Office Package</span>
+                                <span class="text-sm text-gray-500 mt-1">Basic (6hr) or Pro (10hr)</span>
+                            </button>
+                            <button onclick="navigate('software')" class="border-2 border-brandDark rounded-lg p-4 text-center hover:bg-gray-50 transition-colors flex flex-col items-center justify-center">
+                                <i class="fab fa-google text-3xl text-brandDark mb-2"></i>
+                                <span class="font-bold text-lg">Add Google Suite Package</span>
+                                <span class="text-sm text-gray-500 mt-1">Basic (8hr) or Pro (12hr)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE: SOFTWARE ================= -->
+        <section id="software" class="page-section max-w-6xl mx-auto py-12 px-4 sm:px-6">
+            <button onclick="navigate('home')" class="text-brandRed hover:text-red-800 font-semibold text-sm uppercase mb-6 flex items-center"><i class="fas fa-arrow-left mr-2"></i> Back to Overview</button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <i class="fas fa-layer-group text-4xl text-brandDark"></i>
+                <h2 class="text-4xl font-black text-brandDark uppercase">Software Packages</h2>
+            </div>
+            
+            <p class="text-xl text-gray-600 mb-8 font-light">Deep dive into the industry standard productivity suites. These can be taken as a standalone intermediate course (prerequisites apply) or combined with Job Readiness II.</p>
+
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Microsoft Office -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fab fa-microsoft text-3xl text-[#00a4ef]"></i>
+                        <h3 class="text-2xl font-bold">Microsoft Office</h3>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-100 px-6 py-3 border-b font-bold text-gray-800 flex justify-between">
+                            <span>Office Basic</span>
+                            <span class="text-brandRed">6 Hours</span>
+                        </div>
+                        <div class="p-6 flex gap-4">
+                            <div class="flex-1 text-center p-3 bg-blue-50 text-blue-800 rounded"><i class="fas fa-file-word text-2xl mb-1 block"></i> Word</div>
+                            <div class="flex-1 text-center p-3 bg-green-50 text-green-800 rounded"><i class="fas fa-file-excel text-2xl mb-1 block"></i> Excel</div>
+                            <div class="flex-1 text-center p-3 bg-orange-50 text-orange-800 rounded"><i class="fas fa-file-powerpoint text-2xl mb-1 block"></i> PowerPoint</div>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-800 px-6 py-3 border-b font-bold text-white flex justify-between">
+                            <span>Office Professional</span>
+                            <span class="text-brandYellow">10 Hours</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-sm text-gray-500 mb-3 uppercase tracking-wide font-bold">Includes Basic plus:</p>
+                            <div class="flex gap-4">
+                                <div class="flex-1 text-center p-3 bg-sky-50 text-sky-800 rounded border border-sky-100"><i class="fas fa-envelope text-2xl mb-1 block"></i> Outlook</div>
+                                <div class="flex-1 text-center p-3 bg-purple-50 text-purple-800 rounded border border-purple-100"><i class="fas fa-users text-2xl mb-1 block"></i> Teams</div>
+                                <div class="flex-1 text-center p-3 bg-blue-50 text-blue-800 rounded border border-blue-100"><i class="fas fa-cloud text-2xl mb-1 block"></i> OneDrive</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Google Suite -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fab fa-google text-3xl text-[#ea4335]"></i>
+                        <h3 class="text-2xl font-bold">Google Suite</h3>
+                    </div>
+
+
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-100 px-6 py-3 border-b font-bold text-gray-800 flex justify-between">
+                            <span>Google Suite Basic</span>
+                            <span class="text-brandRed">8 Hours</span>
+                        </div>
+                        <div class="p-6 grid grid-cols-4 gap-3">
+                            <div class="text-center p-2 bg-red-50 text-red-700 rounded"><i class="fas fa-envelope text-xl mb-1 block"></i> Gmail</div>
+                            <div class="text-center p-2 bg-blue-50 text-blue-700 rounded"><i class="fas fa-file-alt text-xl mb-1 block"></i> Docs</div>
+                            <div class="text-center p-2 bg-green-50 text-green-700 rounded"><i class="fas fa-table text-xl mb-1 block"></i> Sheets</div>
+                            <div class="text-center p-2 bg-yellow-50 text-yellow-700 rounded"><i class="fas fa-desktop text-xl mb-1 block"></i> Slides</div>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-800 px-6 py-3 border-b font-bold text-white flex justify-between">
+                            <span>Google Suite Professional</span>
+                            <span class="text-brandYellow">12 Hours</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-sm text-gray-500 mb-3 uppercase tracking-wide font-bold">Includes Basic plus:</p>
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="text-center p-2 bg-gray-50 border rounded"><i class="fas fa-video text-xl text-green-600 mb-1 block"></i> Meet</div>
+                                <div class="text-center p-2 bg-gray-50 border rounded"><i class="fas fa-phone text-xl text-blue-500 mb-1 block"></i> Voice</div>
+                                <div class="text-center p-2 bg-gray-50 border rounded"><i class="fab fa-google-drive text-xl text-gray-700 mb-1 block"></i> Drive</div>
+                                <div class="text-center p-2 bg-gray-50 border rounded"><i class="fas fa-calendar-alt text-xl text-blue-600 mb-1 block"></i> Calendar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE: YOUTH ================= -->
+        <section id="youth" class="page-section max-w-5xl mx-auto py-12 px-4 sm:px-6">
+            <button onclick="navigate('home')" class="text-brandRed hover:text-red-800 font-semibold text-sm uppercase mb-6 flex items-center"><i class="fas fa-arrow-left mr-2"></i> Back to Overview</button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <i class="fas fa-user-graduate text-4xl text-brandYellow"></i>
+                <h2 class="text-4xl font-black text-brandDark uppercase">Youth & Young Adult Programs</h2>
+            </div>
+            
+            <p class="text-xl text-gray-600 mb-8 font-light">Digital skills education for our future builders. Tailored specifically for different learning stages.</p>
+
+
+            <!-- High School / College Readiness -->
+            <div class="bg-white rounded-xl shadow-lg border-t-8 border-brandRed p-8 mb-8 relative overflow-hidden">
+                <div class="md:flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-2">High School & College Readiness</h3>
+                        <p class="text-brandRed font-bold"><i class="fas fa-users mr-2"></i> Ages 14-17 & Young Adults (18-25)</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 bg-gray-100 rounded-lg px-4 py-2 text-center border">
+                        <div class="text-xs uppercase text-gray-500 font-bold">Duration</div>
+                        <div class="text-lg font-black text-brandDark">12 Hours Min</div>
+                    </div>
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-gray-800 border-b pb-2 mb-3">Core Lessons</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Basic Computer Skills & OS Setup</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Internet Basics & Safety</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Using Professional Email</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Microsoft Word OR Google Docs</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Your Digital Footprint</strong></li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-50 p-5 rounded-lg border border-yellow-200">
+                        <h4 class="font-bold text-brandDark border-b border-yellow-300 pb-2 mb-3">Optional Add-ons (Highly Recommended)</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-star text-brandYellow mr-2"></i> College Applications & Scholarship Search</li>
+                            <li><i class="fas fa-star text-brandYellow mr-2"></i> Research Search Skills</li>
+                            <li><i class="fas fa-star text-brandYellow mr-2"></i> Building a Resume / CV</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Elementary / Middle School (Coming Soon) -->
+            <div class="bg-gray-100 rounded-xl border border-gray-200 p-8 flex items-center gap-6">
+                <div class="bg-white p-4 rounded-full shadow-sm shrink-0">
+                    <i class="fas fa-child text-4xl text-gray-400"></i>
+                </div>
+                <div>
+                    <div class="inline-block bg-brandGray text-white text-xs font-bold px-2 py-1 rounded uppercase mb-2">Coming Soon</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Tech360: Byte-Sized Digital ABCs</h3>
+                    <p class="text-gray-600">Geared toward Elementary (Grades 3-4) and Middle School ages. Will include Logic and Coding with SCRATCH at Basic and Intermediate levels.</p>
+                </div>
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-brandDark text-white mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-power-off text-3xl text-brandGray"></i>
+                <div class="flex flex-col leading-none">
+                    <span class="text-xs tracking-widest text-brandGray uppercase">Mission:</span>
+                    <span class="text-xl font-black text-brandRed tracking-tight">IGNITE</span>
+                </div>
+            </div>
+            
+            <div class="text-center md:text-right">
+                <h4 class="font-bold text-brandYellow mb-2 uppercase tracking-wide">Ready to Start?</h4>
+                <div class="space-y-1 text-gray-300">
+                    <p><i class="fas fa-globe text-brandGray w-5"></i> missionignite.org</p>
+                    <p><i class="fas fa-envelope text-brandGray w-5"></i> T360partners@missionignite.org</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-black py-4 text-center text-gray-500 text-sm">
+            &copy; 2026 Mission: Ignite. Tech360 Training Programs.
+        </div>
+    </footer>
+
+
+    <!-- JavaScript for SPA Navigation -->
+    <script>
+        function navigate(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+
+
+            // Update Desktop Nav Links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if(link.textContent.toLowerCase().includes(pageId.replace('-', ' ')) || 
+                   (pageId === 'home' && link.textContent === 'Overview') ||
+                   (pageId === 'software' && link.textContent === 'Software Packages') ||
+                   (pageId === 'youth' && link.textContent === 'Youth & Students')
+                ) {
+                    link.classList.add('active');
+                }
+            });
+
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
