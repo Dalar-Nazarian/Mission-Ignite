@@ -24,7 +24,6 @@
             z-index: 1; 
         }
 
-        /* RESPONSIVE LAYOUT CONTAINER RULES */
         .zoom-map-container {
             position: absolute;
             top: 24px;
@@ -68,7 +67,7 @@
 
         #map-zoom { height: 100%; width: 100%; }
 
-        /* POPUP STYLING - Scaled down dynamically for mobile viewports */
+        /* POPUP STYLING - Adjusted to be 30% smaller */
         .maplibregl-popup {
             z-index: 999 !important;
         }
@@ -76,8 +75,7 @@
         .maplibregl-popup-content {
             padding: 0 !important;
             border-radius: 16px !important;
-            width: 308px !important; 
-            max-width: calc(100vw - 32px) !important; /* Cap width for touch screen borders */
+            width: 308px !important; /* 30% smaller than 440px */
             overflow: hidden;
             box-shadow: 0 20px 40px -12px rgba(0,0,0,0.5) !important;
             border: 1px solid rgba(0,0,0,0.1);
@@ -104,7 +102,7 @@
             display: block;
         }
 
-        /* PRECISION MARKER SYSTEM */
+        /* PRECISION MARKER SYSTEM - 20% Smaller Layouts */
         .ignite-marker {
             width: 32px; 
             height: 32px; 
@@ -197,7 +195,7 @@
             <div id="map-zoom"></div>
         </div>
         
-        <!-- Interactive Controls Card (Responsive placement: Bottom on mobile, top on desktop) -->
+        <!-- Interactive Controls Card -->
         <div class="absolute bottom-6 right-4 lg:bottom-auto lg:top-4 lg:right-4 z-[200] flex flex-col gap-2">
             <div class="glass-panel p-2 rounded-2xl shadow-2xl flex flex-col gap-1.5 min-w-[200px]">
                 <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 py-1">Map Controls</p>
@@ -211,9 +209,8 @@
 
     <script>
         const STADIA_API_KEY = '5bb2d18b-f924-40b1-9a9f-dde08f1527ab';
-        let currentMobileTab = 'bg'; // Holds active state of mobile screen: 'bg' or 'zoom'
+        let currentMobileTab = 'bg';
         
-        // Comprehensive list of all 56 WNY & regional partner nodes with resolved missing addresses and years engaged
         const partners = [
             { id: 1, name: "Mission Ignite Hub", address: "1317 Genesee St", city: "Buffalo", type: "HQ", year: "2020", lat: 42.903820, lng: -78.835310, img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800", desc: "The central hub of Mission Ignite, coordinating digital equity initiatives across WNY." },
             { id: 2, name: "Central Library", address: "1 Lafayette Square", city: "Buffalo", type: "Library", year: "2024", lat: 42.885660, lng: -78.873200, img: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800", desc: "Buffalo's landmark knowledge center providing vital tech access to the downtown core." },
@@ -282,31 +279,33 @@
         function initMaps() {
             const brightUrl = `https://tiles.stadiamaps.com/styles/osm_bright.json?api_key=${STADIA_API_KEY}`;
 
+            // Centered to place Endicott specifically in the bottom right corner
             bgMap = new maplibregl.Map({
                 container: 'map-bg',
                 style: brightUrl,
-                center: [-77.5, 42.56], // Balanced center between Grand Island (-78.94) and Endicott (-76.05)
-                zoom: 7.6, // Zoomed out to perfectly frame the wide regional span of WNY down to the Southern Tier
+                center: [-77.9, 42.85], 
+                zoom: 7.7,
                 antialias: true
             });
 
+            // Captures Lockport at the top and Hamburg at the bottom
             zoomMap = new maplibregl.Map({
                 container: 'map-zoom',
                 style: brightUrl,
-                center: [-78.78, 42.94], // Balanced midpoint to frame both Lockport (north) and Hamburg (south)
-                zoom: 10.1, // Adjusted zoom level to capture the expanded north-south metropolitan boundaries
+                center: [-78.78, 42.94], 
+                zoom: 10.1,
                 antialias: true,
                 attributionControl: false
             });
 
             bgMap.on('load', () => {
                 renderMarkers(bgMap, bgMarkers);
-                handleResize(); // Calibrate initial display layout
+                handleResize(); 
             });
             
             zoomMap.on('load', () => {
                 renderMarkers(zoomMap, zoomMarkers);
-                handleResize(); // Calibrate initial display layout
+                handleResize(); 
             });
         }
 
