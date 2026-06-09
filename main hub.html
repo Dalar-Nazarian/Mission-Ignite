@@ -1,0 +1,1378 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission: Ignite | Our Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandRed: '#C33131',
+                        brandGray: '#58595B',
+                        brandDark: '#1a1a1a',
+                        brandYellow: '#F2A900',
+                        brandLight: '#F8F9FA',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'bounce-x': 'bounceX 1s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceX: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(25%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Background color moved to fixed div for image support */
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+
+
+        .hidden-modal {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.98);
+        }
+
+
+        .active-modal {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+
+        #progress-bar {
+            transition: width 0.2s ease-out;
+        }
+        
+        /* Bar animations for infographic */
+        .stat-bar {
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+
+        /* 3D Flip Card Styles */
+        .flip-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .flip-container.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front, .flip-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+        }
+
+
+        /* Equation Builder Styles */
+        .eq-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .eq-btn.disabled-state { filter: grayscale(100%); opacity: 0.5; transform: scale(0.95); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-brandDark relative">
+
+
+    <!-- Subtle Fixed Buffalo Background -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none bg-[#f3f4f6]">
+        <img src="buffalo_background.jpg" alt="Buffalo Skyline" class="w-full h-full object-cover opacity-[0.15] mix-blend-multiply grayscale" onerror="this.src='https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=2500&q=80'">
+        <div class="absolute inset-0 bg-gradient-to-b from-white/30 to-[#f3f4f6]/90"></div>
+    </div>
+
+
+    <!-- Top Fixed Header (Reading Progress) -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40 shadow-sm flex flex-col">
+        <div class="p-4 md:p-5 lg:px-10 flex justify-between items-center">
+            <div class="flex items-center gap-3 md:gap-4 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="image_383d65.png" alt="Mission: Ignite" class="h-8 md:h-10 lg:h-12 object-contain" onerror="this.src='https://via.placeholder.com/250x60?text=Mission+Ignite'">
+                <div class="border-l-2 border-gray-200 pl-3 md:pl-4 ml-1 md:ml-2 hidden sm:block">
+                    <span class="text-brandGray font-bold uppercase tracking-widest text-[0.65rem] md:text-xs">Interactive Story Feed</span>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="bg-gray-100 hover:bg-gray-200 text-brandGray px-4 md:px-6 py-2 md:py-3 rounded-full flex items-center justify-center transition-colors font-bold text-xs md:text-sm uppercase tracking-wide shadow-sm shrink-0">
+                <i class="fas fa-undo md:mr-2"></i> <span class="hidden md:inline">Start Over</span>
+            </button>
+        </div>
+        <!-- Progress Line -->
+        <div class="w-full h-1.5 bg-gray-100">
+            <div id="progress-bar" class="h-full bg-brandRed w-0"></div>
+        </div>
+    </header>
+
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full max-w-5xl mx-auto p-4 sm:p-6 lg:p-10 flex flex-col gap-8 md:gap-12 lg:gap-20 pb-24 md:pb-32">
+        
+        <!-- Title Block -->
+        <div class="text-center mt-6 md:mt-10 mb-4 md:mb-8 animate-fade-in px-2">
+            <h2 class="text-brandRed font-black uppercase tracking-widest text-xs md:text-sm mb-3 md:mb-4"><i class="fas fa-tablet-alt mr-2 animate-pulse"></i> Interactive Experience</h2>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-black text-brandDark leading-tight mb-4 md:mb-6">
+                Technology is just metal and plastic. <br>
+                <span class="italic text-brandGray font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 block">It’s the people who make it an opportunity.</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-500 font-medium max-w-3xl mx-auto">Scroll down to discover how we are closing the digital divide in Western New York by serving those who serve our community.</p>
+        </div>
+
+
+        <!-- SECTION 1: The Divide (Unified) -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.1s;">
+            
+            <!-- Top Part: Main Intro -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-brandDark shrink-0"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center">
+                    <span class="text-xs md:text-sm font-black text-gray-400 uppercase tracking-widest mb-2 block">The Reality</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">The Invisible Wall</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        Society has moved online, but not everyone was given the password. What exactly is the digital divide, and who does it affect?
+                    </p>
+                    <button onclick="openDeepDive('sec1')" class="self-start bg-brandDark text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-black hover:-translate-y-1 transition-all flex items-center shadow-lg group border-2 border-brandDark shadow-[4px_4px_0px_#C33131] md:shadow-[6px_6px_0px_#C33131]">
+                        What is the Divide? <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandYellow"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-100 shrink-0 relative min-h-[250px]">
+                    <img src="the_invisible_wall.jpg" alt="The Invisible Wall" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Sub-Sections Inside The Wall -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <!-- Workforce Survey -->
+                    <div onclick="openDeepDive('sec1_workforce')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandRed p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandRed opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-chart-pie text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-red-50 text-brandRed w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-chart-pie text-lg sm:text-xl"></i>
+                            </div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Workforce Survey</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Discover the staggering technical skills gap employers are facing across New York State.</p>
+                        <span class="text-brandRed font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Data <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <!-- State of the State -->
+                    <div onclick="openDeepDive('sec1_state')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandYellow p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandYellow opacity-10 group-hover:scale-110 transition-transform"><i class="fas fa-landmark text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-yellow-50 text-brandYellow w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-landmark text-lg sm:text-xl"></i>
+                            </div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">State of the State</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">See how everyday survival is now locked behind a rigid digital wall for vulnerable populations.</p>
+                        <span class="text-brandYellow font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Agenda <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- SECTION 2: The Nonprofit Gap -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.2s;">
+            <!-- Top Part -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-brandRed shrink-0 md:order-3"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center md:order-2">
+                    <span class="text-xs md:text-sm font-black text-brandRed uppercase tracking-widest mb-2 block">The Need</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">The Missing Link</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        Internet providers can run cables, and tech companies can build laptops. So why do we desperately need a nonprofit organization to fix this?
+                    </p>
+                    <button onclick="openDeepDive('sec2_main')" class="self-start bg-brandRed text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-red-800 hover:-translate-y-1 transition-all flex items-center shadow-lg group border-2 border-brandRed shadow-[4px_4px_0px_#F2A900] md:shadow-[6px_6px_0px_#F2A900]">
+                        Why A Nonprofit? <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandYellow"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-b md:border-b-0 md:border-r border-gray-100 shrink-0 md:order-1 relative min-h-[250px]">
+                    <img src="buffalo_community.jpg" alt="Buffalo New York Community" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Explore The Data -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div onclick="openDeepDive('sec2_eq')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandDark p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandDark opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-calculator text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-gray-100 text-brandDark w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-calculator text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">The Equity Equation</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Interactive: Discover what truly constitutes digital equity.</p>
+                        <span class="text-brandDark font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Math <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <div onclick="openDeepDive('sec2_roi')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandYellow p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandYellow opacity-10 group-hover:scale-110 transition-transform"><i class="fas fa-chart-line text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-yellow-50 text-brandYellow w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-chart-line text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Economic Impact</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">See the $4 to $1 return on investment for digital inclusion.</p>
+                        <span class="text-brandYellow font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Data <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- SECTION 3: Trusted Spaces -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.3s;">
+            <!-- Top Part -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-brandYellow shrink-0"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center">
+                    <span class="text-xs md:text-sm font-black text-yellow-600 uppercase tracking-widest mb-2 block">The Network</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">The Power of Community</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        Trust is hard to build. That is why it is absolutely necessary to tap into the existing system of community organizations across WNY.
+                    </p>
+                    <button onclick="openDeepDive('sec3_main')" class="self-start bg-brandYellow text-brandDark px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-yellow-500 hover:-translate-y-1 transition-all flex items-center border-2 border-brandDark shadow-[4px_4px_0px_#1a1a1a] md:shadow-[6px_6px_0px_#1a1a1a] group">
+                        Trusted Spaces <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandDark"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-100 shrink-0 relative min-h-[250px]">
+                    <img src="the_power_of_community.jpg" alt="The Power of Community" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Explore The Data -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div onclick="openDeepDive('sec3_demo')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandRed p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandRed opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-users text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-red-50 text-brandRed w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-users text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Community Demographics</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">View the highly diverse populations we proudly support.</p>
+                        <span class="text-brandRed font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Data <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <div onclick="openDeepDive('sec3_locations')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandGray p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandGray opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-map-marked-alt text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-gray-100 text-brandGray w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-map-marked-alt text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Partner Locations</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Explore the 38+ community spaces where we operate.</p>
+                        <span class="text-brandGray font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Sites <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- SECTION 4: The Corporate Catalyst -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.4s;">
+            <!-- Top Part -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-green-600 shrink-0 md:order-3"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center md:order-2">
+                    <span class="text-xs md:text-sm font-black text-green-600 uppercase tracking-widest mb-2 block">The Hardware</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">Upcycling Opportunity</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        Every day, businesses retire perfectly good technology. We partner with them to securely wipe, refurbish, and transform this hardware into community opportunity.
+                    </p>
+                    <button onclick="openDeepDive('sec4_main')" class="self-start bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-green-800 hover:-translate-y-1 transition-all flex items-center shadow-lg group border-2 border-green-600 shadow-[4px_4px_0px_#1a1a1a] md:shadow-[6px_6px_0px_#1a1a1a]">
+                        Corporate Catalyst <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandYellow"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-b md:border-b-0 md:border-r border-gray-100 shrink-0 md:order-1 relative min-h-[250px]">
+                    <img src="upcycling_opportunity.jpg" alt="Upcycling Opportunity" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Explore The Data -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div onclick="openDeepDive('sec4_pipe')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-green-600 p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-green-600 opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-recycle text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-green-50 text-green-600 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-recycle text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">E-Waste Pipeline</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Interactive: Follow a retired device's journey to distribution.</p>
+                        <span class="text-green-600 font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Pipeline <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <div onclick="openDeepDive('sec4_data')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandDark p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandDark opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-shield-alt text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-gray-100 text-brandDark w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-shield-alt text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Corporate Security</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Learn about our NIST 800-88 compliant data destruction.</p>
+                        <span class="text-brandDark font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Security <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- SECTION 5: Hardware & Skills -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.5s;">
+            <!-- Top Part -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-blue-600 shrink-0"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center">
+                    <span class="text-xs md:text-sm font-black text-blue-600 uppercase tracking-widest mb-2 block">The Curriculum</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">The Engine of Equity</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        A computer without training is a paperweight. Training without a computer is quickly forgotten. How do we sustainably provide both?
+                    </p>
+                    <button onclick="openDeepDive('sec5_main')" class="self-start bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-blue-800 hover:-translate-y-1 transition-all flex items-center shadow-lg group border-2 border-blue-600 shadow-[4px_4px_0px_#F2A900] md:shadow-[6px_6px_0px_#F2A900]">
+                        Training & Hardware <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandYellow"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-100 shrink-0 relative min-h-[250px]">
+                    <img src="the_engine_of_equity.jpg" alt="The Engine of Equity" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Explore The Data -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div onclick="openDeepDive('sec5_tracks')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-blue-600 p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-blue-600 opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-book-open text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-blue-50 text-blue-600 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-book-open text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Curriculum Tracks</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Explore our basics, job readiness, and youth programs.</p>
+                        <span class="text-blue-600 font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Catalog <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <div onclick="openDeepDive('sec5_growth')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandRed p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandRed opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-chart-bar text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-red-50 text-brandRed w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-chart-bar text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Assessment Growth</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">View the proven pre/post assessment data and pass rates.</p>
+                        <span class="text-brandRed font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Results <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- SECTION 6: The People -->
+        <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col relative animate-slide-up" style="animation-delay: 0.6s;">
+            <!-- Top Part -->
+            <div class="flex flex-col md:flex-row">
+                <div class="h-2 md:h-auto w-full md:w-3 bg-brandGray shrink-0 md:order-3"></div>
+                <div class="p-6 sm:p-8 lg:p-12 flex-grow flex flex-col justify-center md:order-2">
+                    <span class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-2 block">The Workforce</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-brandDark mb-3 md:mb-4 uppercase tracking-tight">Boots on the Ground</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-6 md:mb-8">
+                        Discover how our AmeriCorps members, expert trainers, and tech specialists act as the human infrastructure required to close the divide.
+                    </p>
+                    <button onclick="openDeepDive('sec6_main')" class="self-start bg-brandGray text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wide hover:bg-gray-700 hover:-translate-y-1 transition-all flex items-center shadow-lg border-2 border-brandGray shadow-[4px_4px_0px_#1a1a1a] md:shadow-[6px_6px_0px_#1a1a1a] group">
+                        Human Infrastructure <i class="fas fa-hand-pointer ml-2 sm:ml-3 group-hover:scale-125 transition-transform text-brandYellow"></i>
+                    </button>
+                </div>
+                <div class="w-full md:w-1/3 bg-gray-100 border-b md:border-b-0 md:border-r border-gray-100 shrink-0 md:order-1 relative min-h-[250px]">
+                    <img src="boots_on_the_ground.jpg" alt="Boots on the Ground" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+
+
+            <!-- Bottom Part: Explore The Data -->
+            <div class="bg-gray-50/50 border-t border-gray-100 p-6 sm:p-8 lg:p-10">
+                <h3 class="text-xs md:text-sm font-black text-gray-500 uppercase tracking-widest mb-4"><i class="fas fa-microscope text-brandRed mr-2"></i> Explore The Data</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div onclick="openDeepDive('sec6_roles')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandGray p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandGray opacity-5 group-hover:scale-110 transition-transform"><i class="fas fa-network-wired text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-gray-100 text-brandGray w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-network-wired text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">Our Workforce</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">Meet the trainers and techs powering the mission.</p>
+                        <span class="text-brandGray font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Roles <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+
+
+                    <div onclick="openDeepDive('sec6_benefits')" class="bg-white rounded-2xl shadow-sm border border-gray-200 border-t-4 border-t-brandYellow p-5 sm:p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-brandYellow opacity-10 group-hover:scale-110 transition-transform"><i class="fas fa-certificate text-8xl"></i></div>
+                        <div class="flex items-center gap-3 mb-3 relative z-10">
+                            <div class="bg-yellow-50 text-brandYellow w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-certificate text-lg sm:text-xl"></i></div>
+                            <h3 class="font-black text-brandDark uppercase tracking-tight text-lg sm:text-xl">AmeriCorps Benefits</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-gray-600 mb-4 flex-grow relative z-10">See how we empower our service members with living stipends and ed awards.</p>
+                        <span class="text-brandYellow font-bold text-xs sm:text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-flex items-center relative z-10">Explore Benefits <i class="fas fa-arrow-right ml-1 sm:ml-2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- End of Story -->
+        <div class="text-center pt-8 md:pt-12 px-4">
+            <i class="fas fa-star text-brandYellow text-2xl md:text-3xl mb-3 md:mb-4"></i>
+            <h3 class="text-xl md:text-2xl font-bold text-brandDark uppercase tracking-widest">You've reached the end of our story.</h3>
+            <p class="text-gray-500 mt-2 font-medium text-sm md:text-base">Thank you for exploring the Mission: Ignite ecosystem.</p>
+        </div>
+
+
+    </main>
+
+
+    <!-- ==================== DEEP DIVE MODAL OVERLAY ==================== -->
+    <div id="deep-dive-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden-modal transition-all duration-300">
+        
+        <!-- Dark Blur Backdrop -->
+        <div class="absolute inset-0 bg-brandDark/80 backdrop-blur-md" onclick="closeDeepDive()"></div>
+        
+        <!-- Modal Content Box - Fluid Scaling applied here -->
+        <div class="relative z-10 bg-white w-full max-w-5xl h-full sm:h-auto max-h-[100dvh] sm:max-h-[90dvh] sm:rounded-[2rem] shadow-2xl flex flex-col overflow-hidden sm:m-4 md:m-8">
+            
+            <!-- Modal Header (Dynamic Color) -->
+            <div id="modal-header" class="p-4 sm:p-6 md:p-8 flex justify-between items-center shrink-0 border-b border-black/10 shadow-sm z-20">
+                <div>
+                    <span id="modal-tag" class="text-[0.65rem] md:text-xs font-black uppercase tracking-widest opacity-80 block mb-0.5 md:mb-1">Tag</span>
+                    <h2 id="modal-title" class="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight line-clamp-1 sm:line-clamp-none">The Title</h2>
+                </div>
+                <button onclick="closeDeepDive()" class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-xl sm:text-2xl transition-colors shrink-0 shadow-inner ml-4">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+
+            <!-- Modal Body (Scrolling Content) -->
+            <div class="p-4 sm:p-6 md:p-10 overflow-y-auto flex-grow bg-gray-50 custom-scrollbar relative z-10">
+                <div id="modal-content" class="w-full">
+                    <!-- Interactive Infographics injected via JS -->
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-white p-4 sm:p-6 border-t border-gray-200 flex justify-center shrink-0 z-20">
+                <button onclick="closeDeepDive()" class="bg-gray-100 hover:bg-gray-200 text-brandDark font-bold uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-4 rounded-xl transition-colors w-full md:w-auto shadow-sm text-sm sm:text-base">
+                    Close Overlay
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- Script Logic for Interactive Infographics -->
+    <script>
+        // Interactive Logic Helpers
+        let eqState = { internet: true, device: true, support: true };
+        
+        function toggleEq(part) {
+            eqState[part] = !eqState[part];
+            
+            // Fluid, reactive button class updates
+            document.getElementById(`eq-btn-${part}`).className = `eq-btn p-3 sm:p-4 rounded-2xl border-4 text-center cursor-pointer flex flex-col items-center justify-center flex-1 aspect-square min-w-[5rem] max-w-[8rem] ${
+                eqState[part] ? (part === 'internet' ? 'bg-white border-brandGray text-brandDark' : part === 'device' ? 'bg-white border-brandGray text-brandDark' : 'bg-brandYellow border-brandYellow text-brandDark') 
+                : 'bg-gray-200 border-gray-300 text-gray-400 disabled-state'
+            }`;
+            
+            // Update icons based on state
+            const iconEl = document.getElementById(`eq-icon-${part}`);
+            if(part === 'internet') iconEl.className = eqState.internet ? "fas fa-wifi text-3xl sm:text-4xl mb-1 sm:mb-2 text-brandDark" : "fas fa-wifi text-3xl sm:text-4xl mb-1 sm:mb-2 opacity-50";
+            if(part === 'device') iconEl.className = eqState.device ? "fas fa-laptop text-3xl sm:text-4xl mb-1 sm:mb-2 text-brandDark" : "fas fa-laptop text-3xl sm:text-4xl mb-1 sm:mb-2 opacity-50";
+            if(part === 'support') iconEl.className = eqState.support ? "fas fa-hands-helping text-3xl sm:text-4xl mb-1 sm:mb-2 text-brandDark" : "fas fa-hands-helping text-3xl sm:text-4xl mb-1 sm:mb-2 opacity-50";
+
+
+            // Calculate Result
+            const resultBox = document.getElementById('eq-result-box');
+            const resultTitle = document.getElementById('eq-result-title');
+            const resultDesc = document.getElementById('eq-result-desc');
+            const resultIcon = document.getElementById('eq-result-icon');
+
+
+            if (eqState.internet && eqState.device && eqState.support) {
+                resultBox.className = "bg-brandRed text-white p-5 sm:p-6 rounded-2xl shadow-lg border-4 border-brandRed text-center h-full flex flex-col justify-center transition-all min-h-[12rem]";
+                resultIcon.className = "fas fa-door-open text-4xl sm:text-5xl mb-3 sm:mb-4";
+                resultTitle.innerText = "Full Participation";
+                resultDesc.innerHTML = "When all three elements are present, individuals can fully participate in the modern economy, apply for jobs, and access telehealth.";
+            } else if (!eqState.device && !eqState.support && !eqState.internet) {
+                resultBox.className = "bg-gray-800 text-white p-5 sm:p-6 rounded-2xl shadow-inner border-4 border-gray-800 text-center h-full flex flex-col justify-center transition-all opacity-80 min-h-[12rem]";
+                resultIcon.className = "fas fa-ban text-4xl sm:text-5xl mb-3 sm:mb-4 text-gray-500";
+                resultTitle.innerText = "Total Exclusion";
+                resultDesc.innerHTML = "Without infrastructure, hardware, or knowledge, an individual is completely locked out of modern society.";
+            } else if (!eqState.support) {
+                resultBox.className = "bg-gray-200 text-brandDark p-5 sm:p-6 rounded-2xl shadow-inner border-4 border-gray-300 text-center h-full flex flex-col justify-center transition-all min-h-[12rem]";
+                resultIcon.className = "fas fa-paper-plane text-4xl sm:text-5xl mb-3 sm:mb-4 text-gray-400";
+                resultTitle.innerText = "An Expensive Paperweight";
+                resultDesc.innerHTML = "<strong>Broadband and a device aren't enough.</strong> A computer without the training to use it safely is just a paperweight. Human support is required.";
+            } else if (!eqState.device) {
+                resultBox.className = "bg-gray-200 text-brandDark p-5 sm:p-6 rounded-2xl shadow-inner border-4 border-gray-300 text-center h-full flex flex-col justify-center transition-all min-h-[12rem]";
+                resultIcon.className = "fas fa-mobile-alt text-4xl sm:text-5xl mb-3 sm:mb-4 text-gray-400";
+                resultTitle.innerText = "The Mobile Bottleneck";
+                resultDesc.innerHTML = "<strong>A connection without a proper device fails.</strong> You cannot effectively write a resume, do homework, or fill out complex government forms on a smartphone.";
+            } else if (!eqState.internet) {
+                resultBox.className = "bg-gray-200 text-brandDark p-5 sm:p-6 rounded-2xl shadow-inner border-4 border-gray-300 text-center h-full flex flex-col justify-center transition-all min-h-[12rem]";
+                resultIcon.className = "fas fa-unlink text-4xl sm:text-5xl mb-3 sm:mb-4 text-gray-400";
+                resultTitle.innerText = "An Isolated Island";
+                resultDesc.innerHTML = "<strong>A trained user with a device needs access.</strong> Without affordable broadband, the device is cut off from job boards, healthcare, and educational resources.";
+            }
+        }
+
+
+        function setPipe(step) {
+            // Update fluid tab buttons
+            for(let i=1; i<=4; i++) {
+                const btn = document.getElementById(`pipe-btn-${i}`);
+                if(i === step) {
+                    btn.classList.add('bg-brandRed', 'text-white', 'border-brandRed');
+                    btn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+                } else {
+                    btn.classList.remove('bg-brandRed', 'text-white', 'border-brandRed');
+                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+                }
+            }
+
+
+            // Update content blocks
+            for(let i=1; i<=4; i++) {
+                const content = document.getElementById(`pipe-content-${i}`);
+                if(i === step) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            }
+        }
+
+
+        // Data and Responsive Infographic Templates Object
+        const storyData = {
+            sec1: {
+                tag: "The Reality",
+                title: "What is the Digital Divide?",
+                headerBg: "bg-brandDark",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8">
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-ban text-brandRed mt-1 mr-3"></i> <span><strong>The Barrier:</strong> Essential services (housing, food, jobs) are strictly digital.</span></li>
+                            <li class="flex items-start"><i class="fas fa-times-circle text-brandRed mt-1 mr-3"></i> <span><strong>The Exclusion:</strong> Those without devices or skills are locked out of the economy.</span></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="bg-brandRed text-white p-6 sm:p-8 rounded-2xl md:rounded-[2rem] shadow-lg text-center relative overflow-hidden">
+                        <i class="fas fa-exclamation-triangle absolute -right-10 -bottom-10 text-9xl opacity-10"></i>
+                        <h3 class="text-xs sm:text-sm font-bold uppercase tracking-widest mb-2 opacity-90">The Cost of Inaction</h3>
+                        <div class="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-2">$1.15<span class="text-4xl md:text-6xl">B</span></div>
+                        <p class="text-sm sm:text-lg font-medium max-w-xl mx-auto">Lost to cybercrime and scams in New York (2023). Leaving individuals disconnected leaves them vulnerable to fraud.</p>
+                    </div>
+                `
+            },
+            sec1_workforce: {
+                tag: "The Gap",
+                title: "NYS Workforce Data (2024)",
+                headerBg: "bg-brandRed",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-6 md:mb-8">
+                        <p class="text-base sm:text-lg md:text-xl text-gray-600 font-medium leading-relaxed">Based on surveys of over 2,600 businesses and 10,300 job seekers in 2024, the gap between employer needs and job seeker resources is staggering.</p>
+                    </div>
+                    
+                    <h3 class="text-base md:text-lg font-black text-brandDark uppercase tracking-wide mb-4 border-b-2 border-gray-100 pb-2">The Job Seeker Barrier</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 md:mb-12">
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandRed transform hover:-translate-y-1 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="47">0</span>%</div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">Lack Modern Digital Skills</h3>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandDark transform hover:-translate-y-1 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="32">0</span>%</div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">No Remote Tech</h3>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandYellow transform hover:-translate-y-1 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="25">0</span>%</div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">Lack Internet Access</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-white p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[2rem] shadow-lg border-2 md:border-4 border-gray-100">
+                        <h3 class="text-base sm:text-lg md:text-xl font-black text-brandDark uppercase tracking-wide mb-6 border-b-2 border-gray-100 pb-4">Top Technical Skills Lacking</h3>
+                        <div class="space-y-6">
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-desktop text-brandRed mr-1 sm:mr-2"></i> Basic Computer Literacy</span>
+                                    <span class="font-black text-xl sm:text-2xl text-brandRed">38%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 sm:h-5 shadow-inner overflow-hidden relative">
+                                    <div class="bg-brandRed h-full rounded-full w-0 stat-bar" data-width="38%"></div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-file-excel text-brandYellow mr-1 sm:mr-2"></i> Excel/Spreadsheet Proficiency</span>
+                                    <span class="font-black text-xl sm:text-2xl text-brandYellow">34%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 sm:h-5 shadow-inner overflow-hidden relative">
+                                    <div class="bg-brandYellow h-full rounded-full w-0 stat-bar" data-width="34%"></div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-chart-bar text-brandGray mr-1 sm:mr-2"></i> Data Analysis</span>
+                                    <span class="font-black text-xl sm:text-2xl text-brandGray">24%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 sm:h-5 shadow-inner overflow-hidden relative">
+                                    <div class="bg-brandGray h-full rounded-full w-0 stat-bar" data-width="24%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 md:mt-8 bg-blue-50 text-blue-800 p-4 rounded-xl border border-blue-200 text-center">
+                            <p class="font-black uppercase tracking-wide text-sm md:text-base mb-1">The #1 Demand in WNY</p>
+                            <p class="text-xs md:text-sm font-medium">"Digital Literacy" is the most requested training program by job seekers in Western New York, closely followed by AI and IT.</p>
+                        </div>
+                    </div>
+                `
+            },
+            sec1_state: {
+                tag: "The Agenda",
+                title: "2026 State of the State",
+                headerBg: "bg-brandYellow",
+                headerText: "text-brandDark",
+                content: `
+                    <div class="mb-6 md:mb-8">
+                        <p class="text-base sm:text-lg md:text-xl text-gray-600 font-medium leading-relaxed">It is an invisible, yet incredibly rigid barrier. Everyday survival is now locked behind a digital wall. <br class="hidden sm:block"><strong class="text-brandRed"><i class="fas fa-hand-pointer animate-pulse mr-1"></i> Tap the cards below</strong> to flip them and reveal the skills required just to survive in New York's economy.</p>
+                    </div>
+                    
+                    <!-- Responsive Interactive Flip Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 md:mb-10">
+                        
+                        <!-- Flip Card 1 -->
+                        <div class="flip-container min-h-[16rem] sm:min-h-[18rem] md:min-h-[16rem]" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-inner">
+                                <!-- Front -->
+                                <div class="flip-front bg-white p-5 sm:p-6 rounded-2xl border-l-8 border-brandRed shadow-md flex flex-col justify-center items-center text-center">
+                                    <i class="fas fa-home text-3xl sm:text-4xl text-brandRed mb-2 sm:mb-3"></i>
+                                    <h3 class="text-lg sm:text-xl font-bold text-brandDark uppercase tracking-wide mb-2">Affordability</h3>
+                                    <p class="text-gray-500 text-xs sm:text-sm">CCAP Childcare portals, SNAP applications, EmPower+ energy assistance.</p>
+                                    <div class="mt-auto pt-3 text-[0.65rem] sm:text-xs font-bold text-brandRed uppercase tracking-widest"><i class="fas fa-sync-alt mr-1"></i> Tap to flip</div>
+                                </div>
+                                <!-- Back -->
+                                <div class="flip-back bg-brandRed text-white p-5 sm:p-6 rounded-2xl shadow-md flex flex-col justify-center items-center text-center">
+                                    <h3 class="text-base sm:text-lg font-bold uppercase tracking-wide mb-2 opacity-90">Required Skills</h3>
+                                    <p class="text-white font-medium text-sm sm:text-base md:text-lg leading-snug sm:leading-normal">Navigate complex portals, securely upload personal documents, track application status, and utilize online comparison tools.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Flip Card 2 -->
+                        <div class="flip-container min-h-[16rem] sm:min-h-[18rem] md:min-h-[16rem]" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-inner">
+                                <!-- Front -->
+                                <div class="flip-front bg-white p-5 sm:p-6 rounded-2xl border-l-8 border-brandYellow shadow-md flex flex-col justify-center items-center text-center">
+                                    <i class="fas fa-hard-hat text-3xl sm:text-4xl text-brandYellow mb-2 sm:mb-3"></i>
+                                    <h3 class="text-lg sm:text-xl font-bold text-brandDark uppercase tracking-wide mb-2">Civics & Safety</h3>
+                                    <p class="text-gray-500 text-xs sm:text-sm">App-based emergency alerts, victim assistance claims, and Housing Connect lotteries.</p>
+                                    <div class="mt-auto pt-3 text-[0.65rem] sm:text-xs font-bold text-brandYellow uppercase tracking-widest"><i class="fas fa-sync-alt mr-1"></i> Tap to flip</div>
+                                </div>
+                                <!-- Back -->
+                                <div class="flip-back bg-brandYellow text-brandDark p-5 sm:p-6 rounded-2xl shadow-md flex flex-col justify-center items-center text-center">
+                                    <h3 class="text-base sm:text-lg font-bold uppercase tracking-wide mb-2 opacity-80">Required Skills</h3>
+                                    <p class="text-brandDark font-medium text-sm sm:text-base md:text-lg leading-snug sm:leading-normal">Registering for digital alerts, searching large databases, purchasing digital passes, and uploading identity verifications.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Flip Card 3 -->
+                        <div class="flip-container min-h-[16rem] sm:min-h-[18rem] md:min-h-[16rem]" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-inner">
+                                <!-- Front -->
+                                <div class="flip-front bg-white p-5 sm:p-6 rounded-2xl border-l-8 border-brandGray shadow-md flex flex-col justify-center items-center text-center">
+                                    <i class="fas fa-folder-open text-3xl sm:text-4xl text-brandGray mb-2 sm:mb-3"></i>
+                                    <h3 class="text-lg sm:text-xl font-bold text-brandDark uppercase tracking-wide mb-2">Cutting Red Tape</h3>
+                                    <p class="text-gray-500 text-xs sm:text-sm">Permitting tracking, virtual public hearings, and Census bureau data tools.</p>
+                                    <div class="mt-auto pt-3 text-[0.65rem] sm:text-xs font-bold text-brandGray uppercase tracking-widest"><i class="fas fa-sync-alt mr-1"></i> Tap to flip</div>
+                                </div>
+                                <!-- Back -->
+                                <div class="flip-back bg-brandGray text-white p-5 sm:p-6 rounded-2xl shadow-md flex flex-col justify-center items-center text-center">
+                                    <h3 class="text-base sm:text-lg font-bold uppercase tracking-wide mb-2 opacity-80">Required Skills</h3>
+                                    <p class="text-white font-medium text-sm sm:text-base md:text-lg leading-snug sm:leading-normal">Creating and managing accounts, utilizing data visualization tools, and navigating AI-assisted permitting software.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Flip Card 4 -->
+                        <div class="flip-container min-h-[16rem] sm:min-h-[18rem] md:min-h-[16rem]" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-inner">
+                                <!-- Front -->
+                                <div class="flip-front bg-white p-5 sm:p-6 rounded-2xl border-l-8 border-brandDark shadow-md flex flex-col justify-center items-center text-center">
+                                    <i class="fas fa-user-shield text-3xl sm:text-4xl text-brandDark mb-2 sm:mb-3"></i>
+                                    <h3 class="text-lg sm:text-xl font-bold text-brandDark uppercase tracking-wide mb-2">Consumer Protection</h3>
+                                    <p class="text-gray-500 text-xs sm:text-sm">Data broker deletion, preventing AI deepfake fraud, and student loan management.</p>
+                                    <div class="mt-auto pt-3 text-[0.65rem] sm:text-xs font-bold text-brandDark uppercase tracking-widest"><i class="fas fa-sync-alt mr-1"></i> Tap to flip</div>
+                                </div>
+                                <!-- Back -->
+                                <div class="flip-back bg-brandDark text-white p-5 sm:p-6 rounded-2xl shadow-md flex flex-col justify-center items-center text-center">
+                                    <h3 class="text-base sm:text-lg font-bold uppercase tracking-wide mb-2 opacity-70">Required Skills</h3>
+                                    <p class="text-white font-medium text-sm sm:text-base md:text-lg leading-snug sm:leading-normal">Auditing personal data footprint, understanding metadata and provenance labels, and optimizing financial strategies.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                `
+            },
+            sec2_main: {
+                tag: "The Need",
+                title: "Why Do We Need A Nonprofit?",
+                headerBg: "bg-brandRed",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8">
+                        <h3 class="text-lg font-black text-brandDark uppercase tracking-wide mb-4">The Market Gap</h3>
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-brandRed mt-1 mr-3"></i> <span><strong>Profit vs. Need:</strong> Private companies invest where there is profit, not where there is highest need.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-brandRed mt-1 mr-3"></i> <span><strong>Affordability &ne; Access:</strong> Subsidized broadband is useless if a family cannot afford a computer.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-brandRed mt-1 mr-3"></i> <span><strong>The Human Element:</strong> The market does not provide the high-touch, patient support required for adult learners.</span></li>
+                        </ul>
+                    </div>
+                `
+            },
+            sec2_eq: {
+                tag: "Interactive",
+                title: "The Equity Equation",
+                headerBg: "bg-brandDark",
+                headerText: "text-white",
+                content: `
+                    <!-- RESPONSIVE INTERACTIVE EQUATION BUILDER -->
+                    <div class="bg-gray-100 p-4 sm:p-6 md:p-8 rounded-[2rem] shadow-inner mb-8 md:mb-10 border-4 border-white">
+                        <div class="text-center mb-4 md:mb-6">
+                            <h3 class="text-base md:text-lg font-black text-brandDark uppercase tracking-widest"><i class="fas fa-hand-pointer text-brandRed mr-1 animate-pulse"></i> The Equation for True Equity</h3>
+                            <p class="text-xs sm:text-sm text-gray-500 font-medium mt-1">Tap an element to remove it and see what happens.</p>
+                        </div>
+                        
+                        <div class="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch justify-center">
+                            
+                            <!-- The Inputs (Fluid wrap) -->
+                            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 w-full lg:w-3/5">
+                                <div id="eq-btn-internet" onclick="toggleEq('internet')" class="eq-btn p-2 sm:p-4 rounded-2xl border-4 border-brandGray bg-white text-center cursor-pointer flex flex-col items-center justify-center flex-1 aspect-square min-w-[5rem] max-w-[8rem] shadow-sm">
+                                    <i id="eq-icon-internet" class="fas fa-wifi text-2xl sm:text-4xl mb-1 sm:mb-2 text-brandDark"></i>
+                                    <span class="font-black uppercase text-[0.65rem] sm:text-xs tracking-wider">Internet</span>
+                                </div>
+                                <span class="text-xl sm:text-2xl font-black text-gray-400 hidden sm:block">+</span>
+                                <div id="eq-btn-device" onclick="toggleEq('device')" class="eq-btn p-2 sm:p-4 rounded-2xl border-4 border-brandGray bg-white text-center cursor-pointer flex flex-col items-center justify-center flex-1 aspect-square min-w-[5rem] max-w-[8rem] shadow-sm">
+                                    <i id="eq-icon-device" class="fas fa-laptop text-2xl sm:text-4xl mb-1 sm:mb-2 text-brandDark"></i>
+                                    <span class="font-black uppercase text-[0.65rem] sm:text-xs tracking-wider">Device</span>
+                                </div>
+                                <span class="text-xl sm:text-2xl font-black text-gray-400 hidden sm:block">+</span>
+                                <div id="eq-btn-support" onclick="toggleEq('support')" class="eq-btn p-2 sm:p-4 rounded-2xl border-4 border-brandYellow bg-brandYellow text-center cursor-pointer flex flex-col items-center justify-center flex-1 aspect-square min-w-[5rem] max-w-[8rem] shadow-sm">
+                                    <i id="eq-icon-support" class="fas fa-hands-helping text-2xl sm:text-4xl mb-1 sm:mb-2 text-brandDark"></i>
+                                    <span class="font-black uppercase text-[0.65rem] sm:text-xs tracking-wider">Support</span>
+                                </div>
+                                <span class="text-xl sm:text-2xl font-black text-gray-400 hidden lg:block">=</span>
+                            </div>
+
+
+                            <!-- The Output (Fluid height) -->
+                            <div class="w-full lg:w-2/5">
+                                <div id="eq-result-box" class="bg-brandRed text-white p-5 sm:p-6 rounded-2xl shadow-lg border-4 border-brandRed text-center h-full min-h-[12rem] flex flex-col justify-center transition-all">
+                                    <i id="eq-result-icon" class="fas fa-door-open text-4xl sm:text-5xl mb-3 sm:mb-4"></i>
+                                    <h4 id="eq-result-title" class="text-xl sm:text-2xl font-black uppercase tracking-tight mb-2">Full Participation</h4>
+                                    <p id="eq-result-desc" class="text-xs sm:text-sm font-medium">When all three elements are present, individuals can fully participate in the modern economy, apply for jobs, and access telehealth.</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                `
+            },
+            sec2_roi: {
+                tag: "The Math",
+                title: "Economic Impact",
+                headerBg: "bg-brandYellow",
+                headerText: "text-brandDark",
+                content: `
+                    <!-- ROI Infographic (Responsive Stack) -->
+                    <div class="bg-white border-4 border-brandYellow p-6 md:p-8 rounded-[2rem] flex flex-col md:flex-row items-center gap-6 md:gap-8 shadow-sm">
+                        <div class="w-full md:w-1/3 text-center shrink-0">
+                            <h3 class="text-xs sm:text-sm font-bold text-gray-400 uppercase tracking-widest mb-1 sm:mb-2">Return on Investment</h3>
+                            <div class="flex items-baseline justify-center gap-1 sm:gap-2">
+                                <span class="text-5xl sm:text-6xl font-black text-brandDark tracking-tighter">$4</span>
+                                <span class="text-xl sm:text-2xl font-black text-gray-300">TO</span>
+                                <span class="text-5xl sm:text-6xl font-black text-brandDark tracking-tighter">$1</span>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3 border-t md:border-t-0 md:border-l border-gray-200 pt-5 md:pt-0 md:pl-8">
+                            <p class="text-base sm:text-lg text-gray-700 font-medium leading-relaxed">For every $1 invested in digital equity, $4 is returned to the local economy via telehealth savings, avoided missed work days, online shopping savings, and access to higher wages.</p>
+                        </div>
+                    </div>
+                `
+            },
+            sec3_main: {
+                tag: "The Network",
+                title: "Trusted Spaces",
+                headerBg: "bg-brandYellow",
+                headerText: "text-brandDark",
+                content: `
+                    <div class="mb-8">
+                        <h3 class="text-lg font-black text-brandDark uppercase tracking-wide mb-4">Our Collaborative Model</h3>
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-map-marker-alt text-brandYellow mt-1 mr-3 text-xl"></i> <span><strong>Meet People Where They Are:</strong> We don't force vulnerable communities to travel to us.</span></li>
+                            <li class="flex items-start"><i class="fas fa-shield-alt text-brandYellow mt-1 mr-3 text-xl"></i> <span><strong>Leverage Existing Trust:</strong> We bring our solutions directly to the community centers they already know and trust.</span></li>
+                            <li class="flex items-start"><i class="fas fa-door-open text-brandYellow mt-1 mr-3 text-xl"></i> <span><strong>Remove Barriers:</strong> Deploying tech into established spaces removes physical and emotional barriers to learning.</span></li>
+                        </ul>
+                    </div>
+                `
+            },
+            sec3_demo: {
+                tag: "Demographics",
+                title: "Community Demographics",
+                headerBg: "bg-brandRed",
+                headerText: "text-white",
+                content: `
+                    <!-- Responsive Animated Counters -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 md:mb-12">
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandRed transform hover:-translate-y-2 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="95">0</span>%</div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">Low-to-Moderate Income</h3>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandDark transform hover:-translate-y-2 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="100">0</span>%</div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">Underserved Communities</h3>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-2xl text-center shadow-md border-b-8 border-brandYellow transform hover:-translate-y-2 transition-transform">
+                            <div class="text-5xl md:text-6xl font-black text-brandDark mb-1 tracking-tighter"><span class="counter" data-target="38">0</span></div>
+                            <h3 class="text-[0.65rem] sm:text-xs font-bold text-gray-500 uppercase tracking-widest">Languages Supported</h3>
+                        </div>
+                    </div>
+                `
+            },
+            sec3_locations: {
+                tag: "Map",
+                title: "Partner Locations",
+                headerBg: "bg-brandGray",
+                headerText: "text-white",
+                content: `
+                    <!-- Partner Types -->
+                    <h3 class="text-base sm:text-lg font-black text-brandDark uppercase tracking-wide mb-4 border-b border-gray-200 pb-2">Where We Operate</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-book-reader text-2xl sm:text-3xl mb-2 text-brandRed"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">Public Libraries</span>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-hands-helping text-2xl sm:text-3xl mb-2 text-brandYellow"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">Community Centers</span>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-building text-2xl sm:text-3xl mb-2 text-blue-600"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">City Housing</span>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-church text-2xl sm:text-3xl mb-2 text-green-600"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">Faith-based Orgs</span>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-graduation-cap text-2xl sm:text-3xl mb-2 text-purple-600"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">Adult Ed Centers</span>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center text-gray-500">
+                            <i class="fas fa-users text-2xl sm:text-3xl mb-2 text-brandDark"></i>
+                            <span class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider">Senior Services</span>
+                        </div>
+                    </div>
+                `
+            },
+            sec4_main: {
+                tag: "The Catalyst",
+                title: "Corporate Catalyst",
+                headerBg: "bg-green-600",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8">
+                        <h3 class="text-lg font-black text-brandDark uppercase tracking-wide mb-4">The Sustainable Solution</h3>
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-recycle text-green-600 mt-1 mr-3 text-xl"></i> <span><strong>The E-Waste Problem:</strong> Businesses retire perfectly good tech, risking landfills or indefinite storage.</span></li>
+                            <li class="flex items-start"><i class="fas fa-lock text-green-600 mt-1 mr-3 text-xl"></i> <span><strong>The Security Need:</strong> Corporations require absolute data destruction and NIST compliance.</span></li>
+                            <li class="flex items-start"><i class="fas fa-laptop-house text-green-600 mt-1 mr-3 text-xl"></i> <span><strong>The Community Benefit:</strong> We securely wipe and refurbish this hardware to create direct local opportunity.</span></li>
+                        </ul>
+                    </div>
+                `
+            },
+            sec4_pipe: {
+                tag: "Interactive",
+                title: "E-Waste Pipeline",
+                headerBg: "bg-green-600",
+                headerText: "text-white",
+                content: `
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mb-6 md:mb-8 bg-green-50 p-4 sm:p-6 rounded-2xl border border-green-200 text-center sm:text-left">
+                        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-xl sm:text-2xl shrink-0"><i class="fas fa-recycle"></i></div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-brandDark mb-1">Interactive Hardware Pipeline</h3>
+                            <p class="text-gray-600 font-medium text-xs sm:text-sm">Tap the steps below to follow a retired laptop's journey from corporate desk to community impact.</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Responsive Interactive Pipeline -->
+                    <div class="bg-white rounded-2xl border-4 border-gray-100 p-2 shadow-sm">
+                        <!-- Navigation Tabs (Fluid Wrap) -->
+                        <div class="flex flex-wrap sm:flex-nowrap gap-1.5 sm:gap-2 mb-2 sm:mb-4 bg-gray-50 p-1.5 sm:p-2 rounded-xl">
+                            <button id="pipe-btn-1" onclick="setPipe(1)" class="flex-1 py-2 sm:py-3 px-1 sm:px-2 rounded-lg font-black uppercase tracking-tight sm:tracking-wide text-[0.65rem] sm:text-xs bg-brandRed text-white border-b-4 border-red-800 transition-colors shadow-sm">1. Intake</button>
+                            <button id="pipe-btn-2" onclick="setPipe(2)" class="flex-1 py-2 sm:py-3 px-1 sm:px-2 rounded-lg font-black uppercase tracking-tight sm:tracking-wide text-[0.65rem] sm:text-xs bg-white text-gray-500 border-b-4 border-gray-200 hover:bg-gray-100 transition-colors">2. Triage</button>
+                            <button id="pipe-btn-3" onclick="setPipe(3)" class="flex-1 py-2 sm:py-3 px-1 sm:px-2 rounded-lg font-black uppercase tracking-tight sm:tracking-wide text-[0.65rem] sm:text-xs bg-white text-gray-500 border-b-4 border-gray-200 hover:bg-gray-100 transition-colors">3. Wipe & Repair</button>
+                            <button id="pipe-btn-4" onclick="setPipe(4)" class="flex-1 py-2 sm:py-3 px-1 sm:px-2 rounded-lg font-black uppercase tracking-tight sm:tracking-wide text-[0.65rem] sm:text-xs bg-white text-gray-500 border-b-4 border-gray-200 hover:bg-gray-100 transition-colors">4. Distribution</button>
+                        </div>
+
+
+                        <!-- Content Panels (Fluid Height) -->
+                        <div class="p-4 sm:p-6 md:p-10 min-h-[16rem] sm:min-h-[14rem] md:min-h-[16rem] flex items-center justify-center">
+                            
+                            <div id="pipe-content-1" class="w-full animate-fade-in text-center">
+                                <i class="fas fa-box-open text-4xl sm:text-5xl md:text-6xl text-brandYellow mb-3 md:mb-4"></i>
+                                <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-brandDark uppercase mb-2 md:mb-3">Donation Acceptance</h3>
+                                <p class="text-gray-600 text-sm sm:text-base md:text-lg max-w-lg mx-auto leading-relaxed">Corporate partners drop off retired technology. We ensure rigorous documentation from the start, providing complete <strong>chain of custody reporting</strong> and <strong>tax-ready documentation</strong> for donors.</p>
+                            </div>
+
+
+                            <div id="pipe-content-2" class="w-full hidden animate-fade-in text-center">
+                                <i class="fas fa-filter text-4xl sm:text-5xl md:text-6xl text-brandGray mb-3 md:mb-4"></i>
+                                <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-brandDark uppercase mb-2 md:mb-3">Triage & Sort</h3>
+                                <p class="text-gray-600 text-sm sm:text-base md:text-lg max-w-lg mx-auto leading-relaxed">Expert technicians identify viable hardware to keep. Unusable materials are responsibly processed exclusively through <strong>certified e-waste recyclers</strong> to ensure zero landfill waste.</p>
+                            </div>
+
+
+                            <div id="pipe-content-3" class="w-full hidden animate-fade-in text-center">
+                                <i class="fas fa-tools text-4xl sm:text-5xl md:text-6xl text-brandDark mb-3 md:mb-4"></i>
+                                <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-brandDark uppercase mb-2 md:mb-3">Wipe & Repair</h3>
+                                <p class="text-gray-600 text-sm sm:text-base md:text-lg max-w-lg mx-auto leading-relaxed">Donor privacy is absolute. We perform 100% secure data wiping complying with <strong>NIST 800-88 certification standards</strong>. Once neutralized, devices are repaired, cleaned, and installed with fresh operating systems.</p>
+                            </div>
+
+
+                            <div id="pipe-content-4" class="w-full hidden animate-fade-in text-center">
+                                <i class="fas fa-hand-holding-heart text-4xl sm:text-5xl md:text-6xl text-brandRed mb-3 md:mb-4"></i>
+                                <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-brandDark uppercase mb-2 md:mb-3">Distribution</h3>
+                                <p class="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Upcycled tech is distributed to maximize community impact. Devices are <strong>sold at affordable rates</strong> (e.g., Goodwill Industries of WNY, Say Yes Buffalo), <strong>rewarded to AmeriCorps service providers</strong> upon completion, or <strong>given to Tech360 participants</strong> to sustain their skills.</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                `
+            },
+            sec4_data: {
+                tag: "Security",
+                title: "Corporate Security",
+                headerBg: "bg-brandDark",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-6 md:mb-8">
+                        <p class="text-base sm:text-lg md:text-xl text-gray-600 font-medium leading-relaxed">Our process guarantees 100% corporate peace of mind while multiplying community impact.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white border-2 border-brandDark rounded-xl p-6 shadow-sm">
+                            <i class="fas fa-shield-alt text-4xl text-brandDark mb-4"></i>
+                            <h4 class="text-xl font-black uppercase tracking-wide mb-2">NIST 800-88 Compliant</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">All devices undergo rigorous, certified data destruction. Our process meets the strict standards set by the National Institute of Standards and Technology.</p>
+                        </div>
+                        <div class="bg-white border-2 border-brandDark rounded-xl p-6 shadow-sm">
+                            <i class="fas fa-file-invoice-dollar text-4xl text-brandDark mb-4"></i>
+                            <h4 class="text-xl font-black uppercase tracking-wide mb-2">Tax Deductible</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">As a 501(c)(3) nonprofit, we provide full chain-of-custody reporting and tax-ready donation receipts for your corporate filings.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-brandYellow text-brandDark font-black text-center p-6 rounded-xl uppercase tracking-widest text-lg shadow-sm border-2 border-brandDark">
+                        Over 35,000 Computers Upcycled
+                    </div>
+                `
+            },
+            sec5_main: {
+                tag: "The Method",
+                title: "Training & Hardware",
+                headerBg: "bg-blue-600",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8">
+                        <h3 class="text-lg font-black text-brandDark uppercase tracking-wide mb-4">The Dual Approach</h3>
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-times-circle text-brandRed mt-1 mr-3 text-xl"></i> <span class="line-through decoration-brandRed decoration-2">A computer without training is a paperweight.</span></li>
+                            <li class="flex items-start"><i class="fas fa-times-circle text-brandRed mt-1 mr-3 text-xl"></i> <span class="line-through decoration-brandRed decoration-2">Training without a computer is quickly forgotten.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-blue-600 mt-1 mr-3 text-xl"></i> <span class="font-bold text-brandDark">We tackle both sides of the digital equation simultaneously.</span></li>
+                        </ul>
+                    </div>
+                `
+            },
+            sec5_tracks: {
+                tag: "Curriculum",
+                title: "Curriculum Tracks",
+                headerBg: "bg-blue-600",
+                headerText: "text-white",
+                content: `
+                    <!-- Curriculum Catalog -->
+                    <div class="mb-10">
+                        <h3 class="text-lg sm:text-xl font-black text-brandDark uppercase tracking-wide mb-6 border-b-2 border-gray-100 pb-2">Our Training Tracks</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            <!-- Basics -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm border-t-4 border-t-brandGray hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-seedling text-2xl text-brandGray"></i>
+                                        <h4 class="font-bold text-brandDark text-lg">Tech360 Basics</h4>
+                                    </div>
+                                    <span class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded">8 Hrs</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">The perfect starting point for adults. Overcoming the fear of technology.</p>
+                                <ul class="text-sm text-gray-700 space-y-1.5">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> <strong>Windows PC Track:</strong> PC Setup & Win 11</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> <strong>Chromebook Track:</strong> Chrome OS Basics</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Internet Safety & Using Email</li>
+                                </ul>
+                            </div>
+
+
+                            <!-- Job Readiness -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm border-t-4 border-t-brandRed hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-briefcase text-2xl text-brandRed"></i>
+                                        <h4 class="font-bold text-brandDark text-lg">Job Readiness</h4>
+                                    </div>
+                                    <span class="bg-red-50 text-brandRed text-xs font-bold px-2 py-1 rounded">12-18 Hrs</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Elevate employability. Essential digital skills required by modern workplaces.</p>
+                                <ul class="text-sm text-gray-700 space-y-1.5">
+                                    <li><i class="fas fa-angle-right text-brandRed mr-2 font-bold"></i> <strong>Level I:</strong> Career Search (Indeed/Job Boards)</li>
+                                    <li><i class="fas fa-angle-right text-brandRed mr-2 font-bold"></i> <strong>Level I:</strong> Digital Footprint (LinkedIn)</li>
+                                    <li><i class="fas fa-angle-right text-brandRed mr-2 font-bold"></i> <strong>Level II:</strong> Embedded Software Packages</li>
+                                </ul>
+                            </div>
+
+
+                            <!-- Software Packages -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm border-t-4 border-t-brandDark hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-layer-group text-2xl text-brandDark"></i>
+                                        <h4 class="font-bold text-brandDark text-lg">Software Mastery</h4>
+                                    </div>
+                                    <span class="bg-gray-100 text-brandDark text-xs font-bold px-2 py-1 rounded">6-12 Hrs</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Deep dive into industry-standard productivity suites for intermediate learners.</p>
+                                <ul class="text-sm text-gray-700 space-y-1.5">
+                                    <li><i class="fab fa-microsoft text-blue-600 mr-2 text-lg"></i> <strong>Microsoft Office:</strong> Basic & Professional</li>
+                                    <li><i class="fab fa-google text-red-500 mr-2 text-lg"></i> <strong>Google Suite:</strong> Docs, Sheets, Drive, Meet</li>
+                                </ul>
+                            </div>
+
+
+                            <!-- Youth & Students -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm border-t-4 border-t-brandYellow hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-user-graduate text-2xl text-brandYellow"></i>
+                                        <h4 class="font-bold text-brandDark text-lg">Youth & Students</h4>
+                                    </div>
+                                    <span class="bg-yellow-50 text-yellow-700 text-xs font-bold px-2 py-1 rounded">Ages 8-25</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Tailored programs for future builders, from elementary to emerging adults.</p>
+                                <ul class="text-sm text-gray-700 space-y-1.5">
+                                    <li><i class="fas fa-star text-brandYellow mr-2"></i> College Apps & Scholarship Search</li>
+                                    <li><i class="fas fa-star text-brandYellow mr-2"></i> High School Job Readiness</li>
+                                    <li><i class="fas fa-flask text-gray-400 mr-2"></i> <strong class="text-gray-500">Coming Soon:</strong> SCRATCH & Coding</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            sec5_growth: {
+                tag: "Assessment",
+                title: "Assessment Growth",
+                headerBg: "bg-brandRed",
+                headerText: "text-white",
+                content: `
+                    <!-- Responsive Assessment Stats -->
+                    <div class="bg-white p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[2rem] shadow-lg border-2 md:border-4 border-gray-100">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 md:mb-8 border-b-2 border-gray-100 pb-4">
+                            <h3 class="text-lg sm:text-xl font-black text-brandDark uppercase tracking-wide">Assessment Pass Rate Growth</h3>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-[0.65rem] sm:text-xs font-bold uppercase shrink-0"><i class="fas fa-chart-line mr-1"></i> Proven Results</span>
+                        </div>
+                        
+                        <div class="space-y-6 md:space-y-8">
+                            <!-- Stat 1 -->
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-desktop text-brandRed mr-1 sm:mr-2"></i> Basic Computer</span>
+                                    <span class="font-black text-xl sm:text-2xl md:text-3xl text-brandRed">+28%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-5 sm:h-6 shadow-inner overflow-hidden relative">
+                                    <div class="absolute left-2 sm:left-4 top-1 text-[0.65rem] sm:text-xs font-bold text-gray-400">Before: 43%</div>
+                                    <div class="bg-gradient-to-r from-red-400 to-brandRed h-full rounded-full w-0 stat-bar relative" data-width="71%">
+                                        <div class="absolute right-2 sm:right-4 top-1 text-[0.65rem] sm:text-xs font-bold text-white">After: 71%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Stat 2 -->
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-globe text-brandYellow mr-1 sm:mr-2"></i> Internet Basics</span>
+                                    <span class="font-black text-xl sm:text-2xl md:text-3xl text-brandYellow">+40%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-5 sm:h-6 shadow-inner overflow-hidden relative">
+                                    <div class="absolute left-2 sm:left-4 top-1 text-[0.65rem] sm:text-xs font-bold text-gray-400">Before: 25%</div>
+                                    <div class="bg-gradient-to-r from-yellow-400 to-brandYellow h-full rounded-full w-0 stat-bar relative" data-width="65%">
+                                        <div class="absolute right-2 sm:right-4 top-1 text-[0.65rem] sm:text-xs font-bold text-brandDark">After: 65%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Stat 3 -->
+                            <div class="relative">
+                                <div class="flex justify-between items-end mb-1 sm:mb-2">
+                                    <span class="text-xs sm:text-sm md:text-base font-bold text-gray-700 uppercase tracking-wide"><i class="fas fa-envelope text-brandGray mr-1 sm:mr-2"></i> Using Email</span>
+                                    <span class="font-black text-xl sm:text-2xl md:text-3xl text-brandGray">+35%</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-5 sm:h-6 shadow-inner overflow-hidden relative">
+                                    <div class="absolute left-2 sm:left-4 top-1 text-[0.65rem] sm:text-xs font-bold text-gray-400">Before: 42%</div>
+                                    <div class="bg-gradient-to-r from-gray-400 to-brandGray h-full rounded-full w-0 stat-bar relative" data-width="77%">
+                                        <div class="absolute right-2 sm:right-4 top-1 text-[0.65rem] sm:text-xs font-bold text-white">After: 77%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t-2 border-gray-100 flex justify-center">
+                            <div class="bg-blue-50 text-blue-800 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest border border-blue-200 text-center">
+                                Course Retention Rate: 87.8%
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            sec6_main: {
+                tag: "The Workforce",
+                title: "Human Infrastructure",
+                headerBg: "bg-brandGray",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8">
+                        <h3 class="text-lg font-black text-brandDark uppercase tracking-wide mb-4">Empowerment Takes Empathy</h3>
+                        <ul class="space-y-4 text-base md:text-lg text-gray-600 font-medium">
+                            <li class="flex items-start"><i class="fas fa-user-friends text-brandGray mt-1 mr-3 text-xl"></i> <span><strong>Beyond Hardware:</strong> Mission: Ignite's greatest asset isn't our computers; it's our people.</span></li>
+                            <li class="flex items-start"><i class="fas fa-heart text-brandGray mt-1 mr-3 text-xl"></i> <span><strong>High-Touch Support:</strong> We act as the human infrastructure supporting our community partners.</span></li>
+                            <li class="flex items-start"><i class="fas fa-users text-brandGray mt-1 mr-3 text-xl"></i> <span><strong>The Empathy Engine:</strong> Our workforce is the empathetic force that turns cold technology into warm, life-changing opportunity.</span></li>
+                        </ul>
+                    </div>
+                `
+            },
+            sec6_roles: {
+                tag: "The Roles",
+                title: "Our Workforce",
+                headerBg: "bg-brandGray",
+                headerText: "text-white",
+                content: `
+                    <div class="mb-8 md:mb-10 text-center">
+                        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+                            <div class="bg-brandDark text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[0.65rem] sm:text-sm font-bold uppercase tracking-widest shadow-md">
+                                38 Partner Locations
+                            </div>
+                            <div class="bg-brandYellow text-brandDark px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[0.65rem] sm:text-sm font-bold uppercase tracking-widest shadow-md">
+                                422 1-on-1 Sessions
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Roles Grid (Responsive Stacking) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 md:mb-10">
+                        <div class="bg-white p-5 sm:p-6 rounded-xl border-t-4 border-brandRed shadow-sm text-center transform hover:-translate-y-1 transition-transform">
+                            <i class="fas fa-chalkboard-teacher text-3xl sm:text-4xl text-brandRed mb-3 sm:mb-4"></i>
+                            <h4 class="font-bold text-brandDark uppercase mb-1 sm:mb-2 text-sm sm:text-base">Digital Literacy</h4>
+                            <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">Delivering hands-on instruction to adults and youth.</p>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-xl border-t-4 border-brandYellow shadow-sm text-center transform hover:-translate-y-1 transition-transform">
+                            <i class="fas fa-tools text-3xl sm:text-4xl text-brandYellow mb-3 sm:mb-4"></i>
+                            <h4 class="font-bold text-brandDark uppercase mb-1 sm:mb-2 text-sm sm:text-base">IT & Refurb</h4>
+                            <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">Refurbishing hardware for distribution and resolving tickets.</p>
+                        </div>
+                        <div class="bg-white p-5 sm:p-6 rounded-xl border-t-4 border-blue-500 shadow-sm text-center transform hover:-translate-y-1 transition-transform">
+                            <i class="fas fa-bullhorn text-3xl sm:text-4xl text-blue-500 mb-3 sm:mb-4"></i>
+                            <h4 class="font-bold text-brandDark uppercase mb-1 sm:mb-2 text-sm sm:text-base">Outreach</h4>
+                            <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">Building relationships and tracking impact data.</p>
+                        </div>
+                    </div>
+                `
+            },
+            sec6_benefits: {
+                tag: "AmeriCorps",
+                title: "AmeriCorps Benefits",
+                headerBg: "bg-brandYellow",
+                headerText: "text-brandDark",
+                content: `
+                    <!-- AmeriCorps Benefits Callout (Responsive Flex) -->
+                    <div class="bg-brandDark rounded-2xl md:rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                        <i class="fas fa-certificate absolute -right-10 -bottom-10 text-[8rem] sm:text-[12rem] opacity-5 transform rotate-12 pointer-events-none"></i>
+                        <div class="w-full md:w-1/2 relative z-10 text-center md:text-left">
+                            <div class="bg-brandRed inline-block px-2 sm:px-3 py-1 rounded text-[0.65rem] sm:text-xs font-black uppercase tracking-widest mb-2 sm:mb-3">Developing Leaders</div>
+                            <h3 class="text-2xl sm:text-3xl font-black uppercase text-white mb-2 sm:mb-3">Empowering Service Members</h3>
+                            <p class="text-sm sm:text-base text-gray-400 font-medium">Your partnership helps us provide our AmeriCorps members with vital career experience, living stipends, and education awards.</p>
+                        </div>
+                        <div class="w-full md:w-1/2 relative z-10 flex gap-3 sm:gap-4 justify-center">
+                            <div class="bg-gradient-to-b from-white/10 to-transparent border border-white/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl text-center flex-1 backdrop-blur-sm">
+                                <div class="text-2xl sm:text-3xl font-black text-white">$26K</div>
+                                <div class="text-[0.6rem] sm:text-xs uppercase tracking-tight sm:tracking-widest text-brandYellow font-bold mt-1 sm:mt-2">Living Stipend</div>
+                            </div>
+                            <div class="bg-gradient-to-b from-brandYellow/20 to-transparent border border-brandYellow/40 p-4 sm:p-5 rounded-xl sm:rounded-2xl text-center flex-1 backdrop-blur-sm">
+                                <div class="text-2xl sm:text-3xl font-black text-brandYellow">$5.1K</div>
+                                <div class="text-[0.6rem] sm:text-xs uppercase tracking-tight sm:tracking-widest text-white font-bold mt-1 sm:mt-2">Ed. Award</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+
+        // Modal Functions
+        const modal = document.getElementById('deep-dive-modal');
+        const modalHeader = document.getElementById('modal-header');
+        const modalTag = document.getElementById('modal-tag');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+
+
+        function openDeepDive(sectionId) {
+            const data = storyData[sectionId];
+            
+            // Populate Modal
+            modalTag.innerText = data.tag;
+            modalTitle.innerText = data.title;
+            modalContent.innerHTML = data.content;
+            
+            // Set Header Colors dynamically
+            modalHeader.className = `p-4 sm:p-6 md:p-8 flex justify-between items-center shrink-0 border-b border-black/10 shadow-sm z-20 ${data.headerBg} ${data.headerText}`;
+            
+            // Reset state for interactive elements
+            if(sectionId === 'sec2_eq') {
+                eqState = { internet: true, device: true, support: true };
+            }
+            
+            // Show Modal
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('active-modal');
+            document.body.style.overflow = 'hidden';
+            
+            // Trigger animations
+            setTimeout(() => {
+                // Counters
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const increment = target / 30; // speed
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            setTimeout(updateCounter, 30);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCounter();
+                });
+
+
+                // Bars
+                const bars = document.querySelectorAll('.stat-bar');
+                bars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 150);
+        }
+
+
+        function closeDeepDive() {
+            modal.classList.remove('active-modal');
+            modal.classList.add('hidden-modal');
+            document.body.style.overflow = 'auto';
+            // slight delay to clear content so user doesn't see it vanish before fade completes
+            setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+        }
+
+
+        // Reading Progress Bar Logic
+        document.querySelector('main').addEventListener('scroll', updateProgress);
+        window.addEventListener('scroll', updateProgress);
+
+
+        function updateProgress() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+    </script>
+</body>
+</html>
