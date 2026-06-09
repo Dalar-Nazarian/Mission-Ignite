@@ -4,29 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meet Our Students</title>
-    <!-- Tailwind CSS for high-quality, lightweight layout styling -->
+    <!-- Tailwind CSS for modern responsive layout styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Premium clean sans-serif typeface -->
+    <!-- Premium sans-serif typeface -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome for the clean interactive interface icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
         }
+        /* Custom styles to keep controls and video sizing consistently gorgeous */
+        video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 1rem;
+            background-color: #000000;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        video:hover {
+            transform: scale(1.005);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
     </style>
 </head>
 <body class="text-slate-900 antialiased min-h-screen bg-white flex flex-col">
 
-    <!-- CLEAN MINIMAL HEADER -->
+    <!-- CLEAN MINIMAL HEADER WITH LOGO ON LEFT, HEADLINES ON RIGHT -->
     <header class="py-12 border-b border-slate-100 bg-white">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
             
-            <!-- Left Side: Mission Ignite Logo -->
+            <!-- Left Side: Mission Ignite Brand Logo -->
             <div class="shrink-0">
                 <img 
                     src="Mission_Ignite-Full_Color-BoldTag (1).png" 
@@ -35,43 +47,33 @@
                     onerror="this.style.display='none'">
             </div>
             
-            <!-- Right Side: Titles & Open House PDF Link -->
-            <div class="text-center md:text-right flex flex-col items-center md:items-end">
+            <!-- Right Side: Clean Titles (Poster PDF Button Removed) -->
+            <div class="text-center md:text-right">
                 <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950">
                     Meet Our Students
                 </h1>
                 <p class="text-base font-normal text-slate-500 mt-1 leading-relaxed">
                     First Shiloh Baptist Church, Buffalo, NY. Tech360 Class
                 </p>
-                <!-- Interactive Action to open the 12th File (June 5 Open House PDF) -->
-                <a 
-                    href="https://drive.google.com/file/d/1E68HiNgDnpJfbs5SPKvrp8B34ewb5bO3/view?usp=sharing" 
-                    target="_blank" 
-                    class="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-slate-200 hover:border-slate-400 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-950 transition-all duration-200 shadow-sm hover:shadow bg-white">
-                    <i class="fa-solid fa-file-pdf text-red-500 text-sm"></i>
-                    View Open House flyer (PDF)
-                </a>
             </div>
 
         </div>
     </header>
 
-    <!-- MAIN GRID CONTAINER -->
+    <!-- MAIN GRID CONTAINER FOR THE 11 TESTIMONIAL CARDS -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
 
-            <!-- Card 1: Mary Jordan -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 1: MARY JORDAN -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq&sz=w640">
+                    <source src="Videos/MaryJordan.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Mary Jordan</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "Everything is getting to be quite exciting for me because everything is new, and I love this."
@@ -79,18 +81,16 @@
                 </div>
             </div>
 
-            <!-- Card 2: Melinda Johnson -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 2: MELINDA JOHNSON -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl&sz=w640">
+                    <source src="Videos/MelindaJohnson01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Melinda Johnson</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "I enjoyed meeting new people, and refreshing on the computer... it's kind of like a refreshment course."
@@ -98,18 +98,16 @@
                 </div>
             </div>
 
-            <!-- Card 3: Allen Douglas -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 3: ALLEN DOUGLAS -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A&sz=w640">
+                    <source src="Videos/AllenDouglas01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Allen Douglas</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "What I've enjoyed so far is learning how the network expands... just enjoying where it's taking me."
@@ -117,18 +115,16 @@
                 </div>
             </div>
 
-            <!-- Card 4: Diane -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 4: DIANE -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ&sz=w640">
+                    <source src="Videos/Diane01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Diane</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "I believe in hands-on learning, so this has been a perfect opportunity to get me back re-engaged."
@@ -136,18 +132,16 @@
                 </div>
             </div>
 
-            <!-- Card 5: Elizabeth -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 5: ELIZABETH -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K&sz=w640">
+                    <source src="Videos/Elizabeth01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Elizabeth</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "Now I can further do a lot more skills without asking other people to help me, so I enjoy it."
@@ -155,18 +149,16 @@
                 </div>
             </div>
 
-            <!-- Card 6: Elsie -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1aVQURAPucPfpK13ro9OdjIYvozy_KVLU" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 6: ELSIE -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1aVQURAPucPfpK13ro9OdjIYvozy_KVLU&sz=w640">
+                    <source src="Videos/Elsie01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1aVQURAPucPfpK13ro9OdjIYvozy_KVLU&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Elsie</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "I just feel grateful to be here... they give us the patience that we need as seniors to learn at our own pace."
@@ -174,18 +166,16 @@
                 </div>
             </div>
 
-            <!-- Card 7: Loreen Gant -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 7: LOREEN GANT -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5&sz=w640">
+                    <source src="Videos/LoreenGant01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Loreen Gant</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "I've enjoyed the instructors breaking this here down for us to make it a lot easier."
@@ -193,18 +183,16 @@
                 </div>
             </div>
 
-            <!-- Card 8: Frances Williams -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 8: FRANCES WILLIAMS -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W&sz=w640">
+                    <source src="Videos/FrancesWilliams01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Frances Williams</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "They say you can't teach an old dog new tricks, but woof woof!"
@@ -212,18 +200,16 @@
                 </div>
             </div>
 
-            <!-- Card 9: Mary Rice -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 9: MARY RICE -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e&sz=w640">
+                    <source src="Videos/MaryRice01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Mary Rice</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "I'm so excited that it's a hands-on course, being taught step by step, section by section."
@@ -231,18 +217,16 @@
                 </div>
             </div>
 
-            <!-- Card 10: Vanessa Birmingham -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 10: VANESSA BIRMINGHAM -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif&sz=w640">
+                    <source src="Videos/VanessaBirmingham01A.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Vanessa Birmingham</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "Now I know what the router does, the browser... those are terminologies that I did not have before."
@@ -250,18 +234,16 @@
                 </div>
             </div>
 
-            <!-- Card 11: Pearliemae -->
-            <div class="flex flex-col group">
-                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-                    <video 
-                        class="w-full h-full object-cover" 
-                        controls 
-                        preload="metadata">
-                        <source src="https://drive.google.com/uc?export=download&id=1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="px-1 flex-grow flex flex-col">
+            <!-- CARD 11: PEARLIEMAE -->
+            <div class="flex flex-col">
+                <video 
+                    controls 
+                    preload="metadata" 
+                    poster="https://drive.google.com/thumbnail?id=1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8&sz=w640">
+                    <source src="Videos/Pearliemae01.mp4" type="video/mp4">
+                    <source src="https://drive.google.com/uc?id=1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8&export=download" type="video/mp4">
+                </video>
+                <div class="mt-4 px-1 flex-grow flex flex-col">
                     <h3 class="font-bold text-slate-900 text-lg tracking-tight">Pearliemae</h3>
                     <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
                         "It was a joy being a senior, that it was really good for me to have big questions answered."
@@ -272,28 +254,14 @@
         </div>
     </main>
 
-    <!-- AUTOMATIC MULTI-PLAY CANCELLER & STATIC COVER ENGINE -->
+    <!-- PLAYBACK COORDINATION SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videos = document.querySelectorAll('video');
 
             videos.forEach(video => {
-                // Preload video triggers
-                video.preload = "auto";
-
-                // Seek 1.0 second upon loading to capture facial screenshots instead of blank slides
-                video.addEventListener('loadedmetadata', () => {
-                    if (video.currentTime === 0) {
-                        video.currentTime = 1.0; 
-                    }
-                });
-
-                // Start from start when player is actively clicked and pause all others
+                // Ensure only one video plays on the screen at any single moment
                 video.addEventListener('play', () => {
-                    if (video.currentTime <= 1.1) {
-                        video.currentTime = 0;
-                    }
-
                     videos.forEach(otherVideo => {
                         if (otherVideo !== video) {
                             otherVideo.pause();
@@ -303,13 +271,8 @@
             });
         });
     </script>
+
 </body>
 </html>
 ```
 eof
-
-### Summary of Changes:
-* **All 12 Google Drive Links Integrated:** Converted all 11 video URLs to HTML5 stream feeds (`https://drive.google.com/uc?export=download&id=...`) and cleanly linked the 12th PDF program link inside your header.
-* **Pure Minimalist Design:** Kept the visual architecture clear and professional, matching the Mission Ignite aesthetic.
-* **Unified Playing Rule:** Kept the custom script ensuring that only one video can play at a time.
-* **Black Screen Eliminator:** Preserved the 1.0s preload mechanism to render high-contrast face snapshots before clicking play.
