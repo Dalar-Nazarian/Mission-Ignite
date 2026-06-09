@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Students</title>
+    <!-- Tailwind CSS for a pure, clean, modern layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter & Playfair Display for premium editorial contrast -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for clean minimalist interface icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+        }
+        .student-quote {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+    </style>
+</head>
+<body class="text-slate-900 min-h-screen flex flex-col antialiased bg-white">
+
+    <!-- Clean Minimalist Header with Mission Ignite Logo Side-by-Side Lockup -->
+    <header class="py-12 sm:py-16 border-b border-slate-100 bg-white">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
+            <!-- Mission Ignite Logo Left Aligned -->
+            <img 
+                src="Mission_Ignite-Full_Color-BoldTag (1).png" 
+                alt="Mission Ignite Logo" 
+                class="h-16 sm:h-24 w-auto object-contain shrink-0"
+                onerror="this.style.display='none'">
+            
+            <!-- Title and Subtitle Pushed to the Right of the Logo -->
+            <div class="text-center sm:text-left">
+                <h1 class="text-4xl sm:text-5xl font-light tracking-tight text-slate-950">
+                    Meet Our Students
+                </h1>
+                <p class="text-lg sm:text-xl font-normal text-slate-500 mt-3 leading-relaxed">
+                    First Shiloh Baptist Church, Buffalo, NY. Tech360 Class
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid with 11 Clean Video Cards pointing to the 'Videos' subfolder -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+            <!-- Card 1: Mary Jordan -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-mary"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/MaryJordan.mp4"
+                        onerror="handleVideoError(this, 'Videos/MaryJordan.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Mary Jordan</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "Everything is getting to be quite exciting for me because everything is new, and I love this."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Melinda Johnson -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-melinda"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/MelindaJohnson01.mp4"
+                        onerror="handleVideoError(this, 'Videos/MelindaJohnson01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Melinda Johnson</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I enjoyed meeting new people, and refreshing on the computer... it's kind of like a refreshment course."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3: Allen Douglas -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-allen"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/AllenDouglas01.mp4"
+                        onerror="handleVideoError(this, 'Videos/AllenDouglas01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Allen Douglas</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "What I've enjoyed so far is learning how the network expands... just enjoying where it's taking me."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 4: Diane -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-diane"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/Diane01.mp4"
+                        onerror="handleVideoError(this, 'Videos/Diane01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Diane</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I believe in hands-on learning, so this has been a perfect opportunity to get me back re-engaged."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 5: Elizabeth -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-elizabeth"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/Elizabeth01.mp4"
+                        onerror="handleVideoError(this, 'Videos/Elizabeth01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Elizabeth</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "Now I can do a lot more skills on my own, without having to ask other people to help me."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 6: Elsie -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-elsie"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/Elsie01.mp4"
+                        onerror="handleVideoError(this, 'Videos/Elsie01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Elsie</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I just feel grateful to be here. The teachers have given us the patience that we need as seniors."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 7: Loreen Gant -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-loreen"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/LoreenGant01.mp4"
+                        onerror="handleVideoError(this, 'Videos/LoreenGant01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Loreen Gant</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I enjoy the instructors breaking this down to make it easier, because this is all brand new to me."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 8: Frances Williams -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-frances"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/FrancesWilliams01.mp4"
+                        onerror="handleVideoError(this, 'Videos/FrancesWilliams01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Frances Williams</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I've enjoyed learning something new. They say you can't teach an old dog new tricks, but woof woof!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 9: Mary Rice -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-maryrice"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/MaryRice01.mp4"
+                        onerror="handleVideoError(this, 'Videos/MaryRice01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Mary Rice</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I am so excited that it's a hands-on course. Step-by-step, section-by-section, we are really learning."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 10: Vanessa Birmingham -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-vanessa"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/VanessaBirmingham01A.mp4"
+                        onerror="handleVideoError(this, 'Videos/VanessaBirmingham01A.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Vanessa Birmingham</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "Terminology is important for me. Now I have the confidence because I'm learning how it all works!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 11: Pearliemae -->
+            <div class="bg-white flex flex-col group">
+                <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 mb-5 shadow-sm border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]">
+                    <video 
+                        id="video-pearliemae"
+                        class="w-full h-full object-cover" 
+                        controls 
+                        preload="metadata" 
+                        src="Videos/Pearliemae01.mp4"
+                        onerror="handleVideoError(this, 'Videos/Pearliemae01.mp4')">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="px-1 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-slate-900 text-lg">Pearliemae</h3>
+                    <p class="student-quote text-slate-600 text-[15px] italic leading-relaxed mt-2.5">
+                        "I enjoyed the class because no question is too dumb to answer. It was truly joyous being a senior here."
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Simple Minimalist Footer -->
+    <footer class="py-16 border-t border-slate-100 text-center text-xs text-slate-400 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="font-normal tracking-wide">© 2026 First Shiloh Baptist Church. Tech360 Student Showcase.</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * STREAMING_CHUNK: Writing Javascript mechanics...
+         * Graceful error handler.
+         * If a video file fails to load directly, it displays a premium, helpful 
+         * empty state inside the card container pointing to the specific file.
+         */
+        function handleVideoError(videoElement, expectedFilename) {
+            console.warn("Could not load video: " + expectedFilename);
+            
+            const container = videoElement.parentElement;
+            if (!container) return;
+
+            // Render a clean fallback banner inside the video frame referencing the target subfolder
+            container.innerHTML = `
+                <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-50 p-4 text-center">
+                    <div class="w-9 h-9 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-play text-xs pl-0.5"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-600">Video Pending Setup</p>
+                    <p class="text-[10px] text-slate-400 mt-1 max-w-[180px] leading-relaxed">
+                        To play, save <span class="font-mono text-slate-500 bg-slate-200/50 px-1 py-0.5 rounded">${expectedFilename}</span> into this folder.
+                    </p>
+                </div>
+            `;
+        }
+
+        // Active Preview & Coordination logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const videos = document.querySelectorAll('video');
+            
+            videos.forEach(video => {
+                // Ensure browser preloads metadata
+                video.preload = "auto";
+
+                // STEP 1: Dynamically seek to 1.0s once metadata loads to grab a real frame instead of a black screen
+                video.addEventListener('loadedmetadata', () => {
+                    if (video.currentTime === 0) {
+                        video.currentTime = 1.0; 
+                    }
+                });
+
+                // STEP 2: When user clicks Play, rewind to 0.0s to play from beginning
+                video.addEventListener('play', () => {
+                    if (video.currentTime <= 1.1) {
+                        video.currentTime = 0;
+                    }
+
+                    // STEP 3: Multi-play preventer (pause other active videos)
+                    videos.forEach(otherVideo => {
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
+eof
+
+### Changes Made:
+* Updated all 11 `video` elements to point to their paths inside the `Videos/` directory (e.g., `src="Videos/MaryJordan.mp4"`).
+* Updated the `handleVideoError` functions to output folder path references so they clearly instruct you to save the files into `Videos/MaryJordan.mp4`, etc., inside the placeholder cards.
+* Preserved the single-file layout, the header image layout with the Mission Ignite logo, play-coordination logic, and perfectly aligned card structures.
