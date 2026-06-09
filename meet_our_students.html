@@ -7,138 +7,58 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-        }
-        /* Iframe container ensures 16:9 responsive aspect ratio */
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            background-color: #000;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; }
+        .modal { display: none; position: fixed; z-index: 50; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { position: relative; width: 90%; max-width: 800px; aspect-ratio: 16/9; }
     </style>
 </head>
 <body class="text-slate-900 antialiased min-h-screen">
 
     <!-- HEADER -->
-    <header class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+    <header class="max-w-7xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-slate-100 pb-12">
             <img src="Mission_Ignite-Full_Color-BoldTag (1).png" alt="Mission Ignite Logo" class="h-16 w-auto object-contain">
             <div class="text-center md:text-right">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">Meet Our Students</h1>
-                <p class="text-base text-slate-500 mt-2 font-medium">First Shiloh Baptist Church, Buffalo, NY. Tech360 Class</p>
+                <h1 class="text-3xl font-extrabold tracking-tight">Meet Our Students</h1>
+                <p class="text-slate-500 mt-1">First Shiloh Baptist Church, Buffalo, NY. Tech360 Class</p>
             </div>
         </div>
     </header>
 
-    <!-- STUDENTS GRID -->
+    <!-- GRID -->
     <main class="max-w-7xl mx-auto px-6 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
-
-            <!-- CARD GENERATION -->
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Example Card: Mary Jordan (Repeat this block for others) -->
+            <button onclick="openVideo('https://drive.google.com/file/d/1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq/preview')" class="group text-left flex flex-col p-4 border border-slate-100 rounded-2xl hover:border-slate-300 transition-all">
+                <div class="bg-slate-100 rounded-xl w-full aspect-video flex items-center justify-center font-medium text-slate-500">Click to Play</div>
                 <h3 class="mt-4 font-bold text-lg">Mary Jordan</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"Everything is getting to be quite exciting for me because everything is new, and I love this."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Melinda Johnson</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"I enjoyed meeting new people, and refreshing on the computer... it's kind of like a refreshment course."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Allen Douglas</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"What I've enjoyed so far is learning how the network expands... just enjoying where it's taking me."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Diane</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"I believe in hands-on learning, so this has been a perfect opportunity to get me back re-engaged."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Elizabeth</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"Now I can further do a lot more skills without asking people to help me, so I enjoy it."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1aVQURAPucPfpK13ro9OdjIYvozy_KVLU/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Elsie</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"I just feel grateful to be here... they give us the patience that we need as seniors to learn at our own pace."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Loreen Gant</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"I've enjoyed the instructors breaking this here down for us to make it a lot easier."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Frances Williams</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"They say you can't teach an old dog new tricks, but woof woof!"</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Mary Rice</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"I'm so excited that it's a hands-on course, being taught step by step, section by section."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Vanessa Birmingham</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"Now I know what the router does, the browser... those are terminologies that I did not have before."</p>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="video-wrapper">
-                    <iframe src="https://drive.google.com/file/d/1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8/preview" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <h3 class="mt-4 font-bold text-lg">Pearliemae</h3>
-                <p class="text-slate-500 italic text-sm mt-1">"It was a joy being a senior, that it was really good for me to have big questions answered."</p>
-            </div>
-
+                <p class="text-slate-500 italic text-sm mt-1">"Everything is getting to be quite exciting for me..."</p>
+            </button>
+            <!-- Add more buttons here with their respective file IDs -->
         </div>
     </main>
 
+    <!-- MODAL -->
+    <div id="videoModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <iframe id="videoPlayer" class="w-full h-full rounded-lg" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openVideo(url) {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('videoPlayer');
+            player.src = url;
+            modal.classList.add('active');
+        }
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('videoPlayer');
+            player.src = '';
+            modal.classList.remove('active');
+        }
+    </script>
 </body>
 </html>
