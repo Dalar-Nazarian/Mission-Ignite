@@ -4,244 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meet Our Students</title>
-    <!-- Tailwind CSS for modern responsive layout styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Premium sans-serif typeface -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
         }
-        /* Custom styles to keep controls and video sizing consistently gorgeous */
-        video {
+        /* Iframe container ensures 16:9 responsive aspect ratio */
+        .video-wrapper {
+            position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border-radius: 1rem;
-            background-color: #000000;
-            border: 1px solid #f1f5f9;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background-color: #000;
         }
-        video:hover {
-            transform: scale(1.005);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
-<body class="text-slate-900 antialiased min-h-screen bg-white flex flex-col">
+<body class="text-slate-900 antialiased min-h-screen">
 
-    <!-- CLEAN MINIMAL HEADER WITH LOGO ON LEFT, HEADLINES ON RIGHT -->
-    <header class="py-12 border-b border-slate-100 bg-white">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
-            
-            <!-- Left Side: Mission Ignite Brand Logo -->
-            <div class="shrink-0">
-                <img 
-                    src="Mission_Ignite-Full_Color-BoldTag (1).png" 
-                    alt="Mission Ignite Logo" 
-                    class="h-16 md:h-20 w-auto object-contain"
-                    onerror="this.style.display='none'">
-            </div>
-            
-            <!-- Right Side: Clean Titles (Poster PDF Button Removed) -->
+    <!-- HEADER -->
+    <header class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-slate-100 pb-12">
+            <img src="Mission_Ignite-Full_Color-BoldTag (1).png" alt="Mission Ignite Logo" class="h-16 w-auto object-contain">
             <div class="text-center md:text-right">
-                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950">
-                    Meet Our Students
-                </h1>
-                <p class="text-base font-normal text-slate-500 mt-1 leading-relaxed">
-                    First Shiloh Baptist Church, Buffalo, NY. Tech360 Class
-                </p>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">Meet Our Students</h1>
+                <p class="text-base text-slate-500 mt-2 font-medium">First Shiloh Baptist Church, Buffalo, NY. Tech360 Class</p>
             </div>
-
         </div>
     </header>
 
-    <!-- MAIN GRID CONTAINER FOR THE 11 TESTIMONIAL CARDS -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
+    <!-- STUDENTS GRID -->
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
 
-            <!-- CARD 1: MARY JORDAN -->
+            <!-- CARD GENERATION -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/MaryJordan.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Mary Jordan</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "Everything is getting to be quite exciting for me because everything is new, and I love this."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1bXx86WyNBBQoy34wE1ycfgWu4zi8B2hq/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Mary Jordan</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"Everything is getting to be quite exciting for me because everything is new, and I love this."</p>
             </div>
 
-            <!-- CARD 2: MELINDA JOHNSON -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/MelindaJohnson01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Melinda Johnson</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "I enjoyed meeting new people, and refreshing on the computer... it's kind of like a refreshment course."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1EK2092lwtdg83bPbmm2sJqo-KJ_doXGl/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Melinda Johnson</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"I enjoyed meeting new people, and refreshing on the computer... it's kind of like a refreshment course."</p>
             </div>
 
-            <!-- CARD 3: ALLEN DOUGLAS -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/AllenDouglas01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Allen Douglas</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "What I've enjoyed so far is learning how the network expands... just enjoying where it's taking me."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1p2bP51pZUmxihEOdCD_VlZGOzIzSJQ6A/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Allen Douglas</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"What I've enjoyed so far is learning how the network expands... just enjoying where it's taking me."</p>
             </div>
 
-            <!-- CARD 4: DIANE -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/Diane01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Diane</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "I believe in hands-on learning, so this has been a perfect opportunity to get me back re-engaged."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1bmpME7Y_S5yyl9RxaNIVPlojg3h_RjoJ/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Diane</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"I believe in hands-on learning, so this has been a perfect opportunity to get me back re-engaged."</p>
             </div>
 
-            <!-- CARD 5: ELIZABETH -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/Elizabeth01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Elizabeth</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "Now I can further do a lot more skills without asking other people to help me, so I enjoy it."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1WEi2T4yf60sHizR0QqjwDbQKyaeoPJ5K/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Elizabeth</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"Now I can further do a lot more skills without asking people to help me, so I enjoy it."</p>
             </div>
 
-            <!-- CARD 6: ELSIE -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/Elsie01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1aVQURAPucPfpK13ro9OdjIYvozy_KVLU&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Elsie</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "I just feel grateful to be here... they give us the patience that we need as seniors to learn at our own pace."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1aVQURAPucPfpK13ro9OdjIYvozy_KVLU/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Elsie</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"I just feel grateful to be here... they give us the patience that we need as seniors to learn at our own pace."</p>
             </div>
 
-            <!-- CARD 7: LOREEN GANT -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/LoreenGant01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Loreen Gant</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "I've enjoyed the instructors breaking this here down for us to make it a lot easier."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1WvKGE4M6XD8qibhlAvErbxhNL-Qd9vK5/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Loreen Gant</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"I've enjoyed the instructors breaking this here down for us to make it a lot easier."</p>
             </div>
 
-            <!-- CARD 8: FRANCES WILLIAMS -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/FrancesWilliams01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Frances Williams</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "They say you can't teach an old dog new tricks, but woof woof!"
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1PdTuEJnRq0i9tjf1vLBGoK0oF92Xxh2W/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Frances Williams</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"They say you can't teach an old dog new tricks, but woof woof!"</p>
             </div>
 
-            <!-- CARD 9: MARY RICE -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/MaryRice01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Mary Rice</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "I'm so excited that it's a hands-on course, being taught step by step, section by section."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1jTqOBAvfnO3eXlnoh9D91U89YQe9dD3e/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Mary Rice</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"I'm so excited that it's a hands-on course, being taught step by step, section by section."</p>
             </div>
 
-            <!-- CARD 10: VANESSA BIRMINGHAM -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/VanessaBirmingham01A.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Vanessa Birmingham</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "Now I know what the router does, the browser... those are terminologies that I did not have before."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1qGxfDr9jJDgCQPQn4qJ0MYhOx_QCMsif/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Vanessa Birmingham</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"Now I know what the router does, the browser... those are terminologies that I did not have before."</p>
             </div>
 
-            <!-- CARD 11: PEARLIEMAE -->
             <div class="flex flex-col">
-                <video controls preload="metadata">
-                    <source src="Videos/Pearliemae01.mp4" type="video/mp4">
-                    <source src="https://drive.google.com/uc?id=1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8&export=download" type="video/mp4">
-                </video>
-                <div class="mt-4 px-1 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-900 text-lg tracking-tight">Pearliemae</h3>
-                    <p class="text-slate-500 text-[14px] italic leading-relaxed mt-2.5">
-                        "It was a joy being a senior, that it was really good for me to have big questions answered."
-                    </p>
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/1tsQLjqm4cIBvkPG-QV4Oh4_ooCAuRcy8/preview" allow="autoplay" allowfullscreen></iframe>
                 </div>
+                <h3 class="mt-4 font-bold text-lg">Pearliemae</h3>
+                <p class="text-slate-500 italic text-sm mt-1">"It was a joy being a senior, that it was really good for me to have big questions answered."</p>
             </div>
 
         </div>
     </main>
 
-    <!-- PLAYBACK COORDINATION SCRIPT -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const videos = document.querySelectorAll('video');
-
-            videos.forEach(video => {
-                // Ensure only one video plays on the screen at any single moment
-                video.addEventListener('play', () => {
-                    videos.forEach(otherVideo => {
-                        if (otherVideo !== video) {
-                            otherVideo.pause();
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-
 </body>
 </html>
-```
-eof
-
-I have completely rewritten the website's structure to make sure it plays nicely both inside local folders and on the live web. Your video players are set to preload metadata natively, bypass browser blocking policies, and ensure that only one video plays at a time!
